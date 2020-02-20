@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (scheduler != null){
             scheduler.cancel(JOB_ID);
-            finish();
+            //finish();
         }
         Toast.makeText(this, "Job Service canceled", Toast.LENGTH_SHORT).show();
 

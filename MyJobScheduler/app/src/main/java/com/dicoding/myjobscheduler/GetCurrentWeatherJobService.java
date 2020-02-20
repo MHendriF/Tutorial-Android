@@ -28,8 +28,8 @@ public class GetCurrentWeatherJobService extends JobService {
     public static final String TAG = GetCurrentWeatherJobService.class.getSimpleName();
 
     //Isikan dengan API Key Anda dari openweathermap;
- //   final String APP_ID = "9f801b5f86e4bac711cfb8c9f4814a7d";
-    final String APP_ID = "93a3696714297ee5a9f65486aa8cb824";
+    final String APP_ID = "9f801b5f86e4bac711cfb8c9f4814a7d";
+    //final String APP_ID = "93a3696714297ee5a9f65486aa8cb824";
 
     //Isikan dengan nama kota Anda;
     final String CITY = "Jakarta";
