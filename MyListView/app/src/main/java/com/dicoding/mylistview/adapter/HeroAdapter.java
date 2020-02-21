@@ -8,11 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dicoding.mylistview.MainActivity;
 import com.dicoding.mylistview.R;
 import com.dicoding.mylistview.model.Hero;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HeroAdapter extends BaseAdapter {
     private Context context;
@@ -60,7 +61,7 @@ public class HeroAdapter extends BaseAdapter {
     private class ViewHolder {
         private TextView txtName;
         private TextView txtDescription;
-        private ImageView imgPhoto;
+        private CircleImageView imgPhoto;
         ViewHolder(View view) {
             txtName = view.findViewById(R.id.txt_name);
             txtDescription = view.findViewById(R.id.txt_description);
