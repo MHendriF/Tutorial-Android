@@ -23,7 +23,7 @@ import cz.msebera.android.httpclient.Header;
 public class MyWorker extends Worker {
 
     private static final String TAG = MyWorker.class.getSimpleName();
-    private static final String APP_ID = "YOUR_KEY_HERE";
+    private static final String APP_ID = "9f801b5f86e4bac711cfb8c9f4814a7d";
     public static final String EXTRA_CITY = "city";
     private Result resultStatus;
 
@@ -35,8 +35,8 @@ public class MyWorker extends Worker {
     @Override
     public Result doWork() {
         String dataCity = getInputData().getString(EXTRA_CITY);
-        Result status = getCurrenWeather(dataCity);
-        return status;
+        Result statusWork = getCurrenWeather(dataCity);
+        return statusWork;
     }
 
     private Result getCurrenWeather(final String city) {

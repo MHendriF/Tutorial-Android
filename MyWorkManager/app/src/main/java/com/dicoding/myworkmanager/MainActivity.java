@@ -2,8 +2,11 @@ package com.dicoding.myworkmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
@@ -13,11 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnOneTimeTask;
+    private Button btnOneTimeTask, btnPeriodicTask, btnCancelTask ;
     private EditText editCity;
     private TextView textStatus;
+    private PeriodicWorkRequest periodicWorkRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editCity = findViewById(R.id.editCity);
         textStatus = findViewById(R.id.textStatus);
         btnOneTimeTask.setOnClickListener(this);
+
+        btnPeriodicTask = findViewById(R.id.btnPeriodicTask);
+        btnCancelTask = findViewById(R.id.btnCancelTask);
+        btnPeriodicTask.setOnClickListener(this);
+        btnCancelTask.setOnClickListener(this);
     }
 
     @Override
@@ -36,7 +47,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnOneTimeTask:
                 startOneTimeTask();
                 break;
+            case R.id.btnPeriodicTask:
+                startPeriodicTask();
+                break;
+            case R.id.btnCancelTask:
+                cancelPeriodicTask();
+                break;
         }
+    }
+
+    private void startPeriodicTask() {
+        textStatus.setText(getString(R.string.status));
+        Data data = new Data.Builder()
+                .putString(MyWorker.EXTRA_CITY, editCity.getText().toString())
+                .build();
+
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        periodicWorkRequest = new PeriodicWorkRequest.Builder(MyWorker.class, 15, TimeUnit.MINUTES)
+                .setInputData(data)
+                .setConstraints(constraints)
+                .build();
+
+        WorkManager.getInstance().enqueue(periodicWorkRequest);
+        WorkManager.getInstance().getWorkInfoByIdLiveData(periodicWorkRequest.getId()).observe(MainActivity.this, new Observer<WorkInfo>() {
+            @Override
+            public void onChanged(WorkInfo workInfo) {
+                String status = workInfo.getState().name();
+                textStatus.append("\n"+status);
+                btnCancelTask.setEnabled(false);
+                if (workInfo.getState() == WorkInfo.State.ENQUEUED){
+                    btnCancelTask.setEnabled(true);
+                }
+            }
+        });
     }
 
     private void startOneTimeTask() {
@@ -49,11 +95,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
         WorkManager.getInstance().enqueue(oneTimeWorkRequest);
         WorkManager.getInstance().getWorkInfoByIdLiveData(oneTimeWorkRequest.getId()).observe(MainActivity.this, new Observer<WorkInfo>() {
-
+            @Override
             public void onChanged(WorkInfo workInfo) {
                 String status = workInfo.getState().name();
                 textStatus.append("\n"+status);
             }
         });
+    }
+
+    private void cancelPeriodicTask() {
+        WorkManager.getInstance().cancelWorkById(periodicWorkRequest.getId());
     }
 }
