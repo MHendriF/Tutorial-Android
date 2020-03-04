@@ -75,7 +75,7 @@ public class NoteHelper {
         return database.update(DATABASE_TABLE, values, _ID + " = ?", new String[]{id});
     }
 
-    private int deleteById(String id){
+    public int deleteById(String id){
         return database.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
     }
 }
