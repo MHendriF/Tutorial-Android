@@ -1,12 +1,15 @@
 package com.dicoding.mysharedpreferences;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvName, tvAge, tvPhoneNo, tvEmail, tvIsLoveMU;
     private Button btnSave;
@@ -14,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isPreferenceEmpty = false;
     private UserModel userModel;
+    private final int REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         mUserPreference = new UserPreference(this);
         showExistingPreference();
+        btnSave.setOnClickListener(this);
     }
 
     private void showExistingPreference() {
@@ -60,4 +65,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_save){
+            Intent intent = new Intent(MainActivity.this, FormUserPreferenceActivity.class);
+            if (isPreferenceEmpty){
+                intent.putExtra(FormUserPreferenceActivity.EXTRA_TYPE_FORM, FormUserPreferenceActivity.TYPE_ADD);
+                intent.putExtra("USER", userModel);
+            }else{
+                intent.putExtra(FormUserPreferenceActivity.EXTRA_TYPE_FORM, FormUserPreferenceActivity.TYPE_EDIT);
+                intent.putExtra("USER", userModel);
+            }
+            startActivityForResult(intent, REQUEST_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE){
+            if (resultCode == FormUserPreferenceActivity.RESULT_CODE){
+                userModel = data.getParcelableExtra(FormUserPreferenceActivity.EXTRA_RESULT);
+                populateView(userModel);
+                checkForm(userModel);
+            }
+        }
+    }
 }
