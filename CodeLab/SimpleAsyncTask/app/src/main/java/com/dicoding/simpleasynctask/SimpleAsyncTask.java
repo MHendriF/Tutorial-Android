@@ -1,6 +1,7 @@
 package com.dicoding.simpleasynctask;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -22,6 +23,9 @@ public class SimpleAsyncTask extends AsyncTask<Void, Void, String> {
         // Make the task take long enough that we have
         // time to rotate the phone while it is running
         int s = n * 200;
+        for (int i=0; i<s; i++){
+            Log.d("trace", String.valueOf(i));
+        }
 
         // Sleep for the random amount of time
         try {

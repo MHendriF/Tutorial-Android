@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import es.dmoral.toasty.Toasty;
+
 public class MainActivity extends AppCompatActivity {
 
     private int mCount = 0;
@@ -23,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showToast(View view) {
-        Toast toast = Toast.makeText(this, R.string.toast_message, Toast.LENGTH_SHORT);
-        toast.show();
+//        Toast toast = Toast.makeText(this, R.string.toast_message, Toast.LENGTH_SHORT);
+//        toast.show();
+        Toasty.info(this, R.string.toast_message, Toast.LENGTH_LONG).show();
     }
 
     public void countUp(View view) {

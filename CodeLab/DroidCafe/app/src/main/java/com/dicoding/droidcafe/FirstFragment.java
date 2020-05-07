@@ -4,13 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
+
 public class FirstFragment extends Fragment {
+
+    Badge badge;
+    ImageView ivDonut;
 
     @Override
     public View onCreateView(
@@ -23,6 +30,10 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ivDonut = view.findViewById(R.id.donut);
+        badge =  new QBadgeView(getActivity()).bindTarget(ivDonut);
+        badge.setBadgeTextSize(20, true).setBadgeNumber(5);
 
         view.findViewById(R.id.donut).setOnClickListener(new View.OnClickListener() {
             @Override
