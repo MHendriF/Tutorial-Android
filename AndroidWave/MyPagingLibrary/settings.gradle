@@ -1,0 +1,2 @@
+rootProject.name='MyPagingLibrary'
+include ':app'
