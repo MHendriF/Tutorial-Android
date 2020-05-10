@@ -16,7 +16,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_menu"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/text_content_image"/>
 
         <ImageView
             android:layout_width="40dp"
@@ -24,7 +25,8 @@
             android:src="@drawable/ic_add"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@color/banner_background"/>
+            android:background="@color/banner_background"
+            android:contentDescription="@string/text_content_image"/>
     </RelativeLayout>
 
     <ScrollView
@@ -73,7 +75,8 @@
                         android:src="@drawable/ic_search"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="15dp"/>
+                        android:layout_marginEnd="15dp"
+                        android:contentDescription="@string/text_content_image"/>
 
                 </RelativeLayout>
             </RelativeLayout>
@@ -100,7 +103,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_restaurant"
-                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true"
+                            android:contentDescription="@string/text_content_image"/>
                     </RelativeLayout>
 
                     <TextView
@@ -127,7 +131,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_hotel"
-                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true"
+                            android:contentDescription="@string/text_content_image"/>
                     </RelativeLayout>
 
                     <TextView
@@ -154,7 +159,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_school"
-                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true"
+                            android:contentDescription="@string/text_content_image"/>
                     </RelativeLayout>
 
                     <TextView
@@ -181,7 +187,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:src="@drawable/ic_store"
-                            android:layout_centerInParent="true"/>
+                            android:layout_centerInParent="true"
+                            android:contentDescription="@string/text_content_image"/>
                     </RelativeLayout>
 
                     <TextView
@@ -224,15 +231,15 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="@string/featured_locations_description"/>
-
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_feature"
+                    android:id="@+id/rv_featured"
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
+                    android:layout_height="300dp"
                     android:layout_toEndOf="@+id/ll_featured_background"
-                    android:background="@color/home_background"/>
+                    android:background="@color/home_background"
+                    tools:listitem="@layout/featured_card"/>
 
             </RelativeLayout>
 
@@ -240,7 +247,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:padding="20dp">
 
                 <RelativeLayout
@@ -265,15 +272,17 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_most_viewed"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:padding="20dp">
 
                 <RelativeLayout
@@ -298,12 +307,12 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_categories"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-
+    
 </LinearLayout>
