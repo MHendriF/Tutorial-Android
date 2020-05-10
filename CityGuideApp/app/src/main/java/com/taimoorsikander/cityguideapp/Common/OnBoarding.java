@@ -3,13 +3,20 @@ package com.taimoorsikander.cityguideapp.Common;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.taimoorsikander.cityguideapp.HelperClasses.SliderAdapter;
 import com.taimoorsikander.cityguideapp.R;
+import com.taimoorsikander.cityguideapp.User.UserDashboard;
 
 public class OnBoarding extends AppCompatActivity {
 
@@ -17,20 +24,34 @@ public class OnBoarding extends AppCompatActivity {
     LinearLayout llDots;
     SliderAdapter sliderAdapter;
     TextView[] tvDots;
+    Button btnStart;
+    Animation animation;
+    int currentPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_on_boarding);
 
         viewPager = findViewById(R.id.slider);
         llDots = findViewById(R.id.ll_dots);
+        btnStart = findViewById(R.id.btn_start);
 
         sliderAdapter = new SliderAdapter(this);
         viewPager.setAdapter(sliderAdapter);
 
         addDots(0);
         viewPager.addOnPageChangeListener(changeListener);
+    }
+
+    public void skip(View view) {
+        startActivity(new Intent(this, UserDashboard.class));
+        finish();
+    }
+
+    public void next(View view) {
+        viewPager.setCurrentItem(currentPos+1);
     }
 
     private void addDots(int position){
@@ -58,6 +79,15 @@ public class OnBoarding extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             addDots(position);
+            currentPos = position;
+
+            if (position == 3) {
+                animation = AnimationUtils.loadAnimation(OnBoarding.this, R.anim.bottom_anim);
+                btnStart.setAnimation(animation);
+                btnStart.setVisibility(View.VISIBLE);
+            }else {
+                btnStart.setVisibility(View.INVISIBLE);
+            }
         }
 
         @Override
