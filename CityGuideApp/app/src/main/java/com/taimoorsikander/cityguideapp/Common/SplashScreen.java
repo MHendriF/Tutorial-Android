@@ -16,7 +16,7 @@ import com.taimoorsikander.cityguideapp.User.UserDashboard;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static final int SPLASH_TIMER = 5000;
+    private static final int SPLASH_TIMER = 3500;
     ImageView ivBackground;
     TextView tvPoweredByLine;
     Animation sideAnim, bottomAnim;
@@ -39,7 +39,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, UserDashboard.class);
+                Intent intent = new Intent(SplashScreen.this, OnBoarding.class);
                 startActivity(intent);
                 finish();
             }
