@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.HelperClasses;
+package com.taimoorsikander.cityguideapp.helperClasses;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,28 +14,28 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.taimoorsikander.cityguideapp.R;
 
 public class SliderAdapter extends PagerAdapter {
-    private Context context;
+    private static Context context;
     LayoutInflater layoutInflater;
 
     public SliderAdapter(Context context) {
         this.context = context;
     }
 
-    int[] images = {
+    private int[] images = {
             R.drawable.search_place,
             R.drawable.make_a_call,
             R.drawable.add_missing_place,
             R.drawable.sit_back_and_relax,
     };
 
-    int[] headings = {
+    private int[] headings = {
             R.string.first_slide_title,
             R.string.second_slide_title,
             R.string.third_slide_title,
             R.string.fourth_slide_title,
     };
 
-    int[] description = {
+    private int[] description = {
             R.string.first_slide_desc,
             R.string.second_slide_desc,
             R.string.third_slide_desc,

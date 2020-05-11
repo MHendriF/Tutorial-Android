@@ -49,6 +49,9 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="rate_us">Rate Us</string>
+    <string name="expand_all">expand all</string>
+    <string name="car_rent">Car Rent</string>
+    <string name="hospitals">Hospitals</string>
 
 
 </resources>

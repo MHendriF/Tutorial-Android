@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.User;
+package com.taimoorsikander.cityguideapp.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,12 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter.Categories;
-import com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter.CategoriesAdapter;
-import com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter.FeaturedAdapter;
-import com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter.Featured;
-import com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter.MostViewed;
-import com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter.MostViewedAdapter;
+import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.Categories;
+import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.CategoriesAdapter;
+import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.FeaturedAdapter;
+import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.Featured;
+import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.MostViewed;
+import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.MostViewedAdapter;
 import com.taimoorsikander.cityguideapp.R;
 
 import java.util.ArrayList;
@@ -111,13 +112,15 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
 
         featuredAdapter = new FeaturedAdapter(model);
         rvFeatured.setAdapter(featuredAdapter);
-
-        GradientDrawable gradient1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{0xffeff400, 0xffaf600});
-
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_all_categories:
+                startActivity(new Intent(UserDashboard.this, AllCategories.class));
+                break;
+        }
         return true;
     }
 
@@ -144,7 +147,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         //Add any color or remove it to use the default one!
         //To make it transparent use Color.Transparent in side setScrimColor();
         //drawerLayout.setScrimColor(Color.TRANSPARENT);
-        drawerLayout.setScrimColor(getResources().getColor(R.color.colorPrimary));
+        //drawerLayout.setScrimColor(getResources().getColor(R.color.colorPrimary));
         drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {

@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.Common;
+package com.taimoorsikander.cityguideapp.common;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.taimoorsikander.cityguideapp.R;
-import com.taimoorsikander.cityguideapp.User.UserDashboard;
+import com.taimoorsikander.cityguideapp.user.UserDashboard;
 
 public class SplashScreen extends AppCompatActivity {
 

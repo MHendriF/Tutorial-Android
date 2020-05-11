@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter;
+package com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter;
 
 import android.graphics.drawable.Drawable;
 

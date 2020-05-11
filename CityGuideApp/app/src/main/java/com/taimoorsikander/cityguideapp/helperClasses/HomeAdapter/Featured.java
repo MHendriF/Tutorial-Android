@@ -1,15 +1,9 @@
-package com.taimoorsikander.cityguideapp.HelperClasses.HomeAdapter;
+package com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter;
 
-public class MostViewed {
+public class Featured {
     private int images;
     private String title;
     private String description;
-
-    public MostViewed(int images, String title, String description) {
-        this.images = images;
-        this.title = title;
-        this.description = description;
-    }
 
     public int getImages() {
         return images;
@@ -32,6 +26,12 @@ public class MostViewed {
     }
 
     public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Featured(int images, String title, String description) {
+        this.images = images;
+        this.title = title;
         this.description = description;
     }
 }
