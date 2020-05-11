@@ -70,7 +70,8 @@
                 android:layout_marginStart="10dp"
                 android:background="@color/colorPrimary"
                 android:textColor="@color/black"
-                android:onClick="callSingUpScreen"/>
+                android:onClick="callSingUpScreen"
+                android:transitionName="transition_sign_up"/>
 
         </LinearLayout>
 

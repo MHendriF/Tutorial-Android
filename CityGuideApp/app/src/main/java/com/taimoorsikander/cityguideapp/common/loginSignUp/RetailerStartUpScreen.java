@@ -22,7 +22,7 @@ public class RetailerStartUpScreen extends AppCompatActivity {
     }
 
     public void callLoginScreen(View view) {
-        Intent intent = new Intent(getApplicationContext(),  Login.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(findViewById(R.id.btn_login), "transition_login");
@@ -32,6 +32,12 @@ public class RetailerStartUpScreen extends AppCompatActivity {
     }
 
     public void callSingUpScreen(View view) {
+        Intent intent = new Intent(getApplicationContext(), SignUp.class);
 
+        Pair[] pairs = new Pair[1];
+        pairs[0] = new Pair<View, String>(findViewById(R.id.btn_sign_up), "transition_sign_up");
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RetailerStartUpScreen.this, pairs);
+        startActivity(intent, options.toBundle());
     }
 }
