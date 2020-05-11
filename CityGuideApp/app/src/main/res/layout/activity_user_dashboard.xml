@@ -44,6 +44,7 @@
                 android:src="@drawable/ic_add"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:onClick="callRetailerScreens"
                 android:background="@color/banner_background"
                 android:contentDescription="@string/text_content_image"/>
         </RelativeLayout>

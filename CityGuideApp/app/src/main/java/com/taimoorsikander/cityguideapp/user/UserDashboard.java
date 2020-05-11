@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.taimoorsikander.cityguideapp.common.loginSignUp.RetailerStartUpScreen;
 import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.Categories;
 import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.CategoriesAdapter;
 import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.FeaturedAdapter;
@@ -53,10 +54,8 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         rvFeatured = findViewById(R.id.rv_featured);
         rvMostViewed = findViewById(R.id.rv_most_viewed);
         rvCategories = findViewById(R.id.rv_categories);
-
         menuIcon = findViewById(R.id.iv_menu_icon);
         contentView = findViewById(R.id.ll_content);
-
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
 
@@ -172,5 +171,9 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
             drawerLayout.closeDrawer(GravityCompat.START);
         } else
             super.onBackPressed();
+    }
+
+    public void callRetailerScreens(View view) {
+        startActivity(new Intent(UserDashboard.this, RetailerStartUpScreen.class));
     }
 }

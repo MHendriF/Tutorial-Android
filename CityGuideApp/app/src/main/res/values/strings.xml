@@ -39,7 +39,7 @@
     <string name="text_title">McDonal\'s</string>
     <string name="text_content_image">Images</string>
 
-    <!--Title and Description-->
+    <!--Navigation-->
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="all_categories">All Categories</string>
@@ -49,9 +49,17 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="rate_us">Rate Us</string>
-    <string name="expand_all">expand all</string>
+    <string name="expand_all">Expand All</string>
     <string name="car_rent">Car Rent</string>
     <string name="hospitals">Hospitals</string>
 
+    <!--Navigation-->
+    <string name="sign_up">Sign Up</string>
+    <string name="retailer_heading">Grow\nYour Business</string>
+    <string name="retailer_tag_line">We will help you to grow your business using online service!</string>
+    <string name="create_account">Create\nAccount</string>
+    <string name="how_to_work">How we work?</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">Forget Password</string>
 
 </resources>
