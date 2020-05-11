@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".common.loginSignUp.Login"
-            android:windowSoftInputMode="stateHidden"/>
+            android:name=".common.loginSignUp.Login"/>
         <activity android:name=".common.loginSignUp.RetailerStartUpScreen" />
         <activity android:name=".user.AllCategories" />
         <activity android:name=".common.OnBoarding" />

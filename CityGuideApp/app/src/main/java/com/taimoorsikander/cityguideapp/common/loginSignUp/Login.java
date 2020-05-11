@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.taimoorsikander.cityguideapp.R;
 import com.taimoorsikander.cityguideapp.user.AllCategories;
