@@ -39,4 +39,16 @@
     <string name="text_title">McDonal\'s</string>
     <string name="text_content_image">Images</string>
 
+    <!--Title and Description-->
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="all_categories">All Categories</string>
+    <string name="add_missing_place">Add Missing Place</string>
+    <string name="profile">Profile</string>
+    <string name="share">Share</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="rate_us">Rate Us</string>
+
+
 </resources>
