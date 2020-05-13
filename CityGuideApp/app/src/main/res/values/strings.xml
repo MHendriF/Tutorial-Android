@@ -61,10 +61,19 @@
     <string name="how_to_work">How we work?</string>
     <string name="remember_me">Remember Me</string>
     <string name="forget_password">Forget Password</string>
+
+    <!--Field-->
     <string name="enter_username">Enter Username</string>
     <string name="full_name">Full Name</string>
     <string name="enter_password">Enter Password</string>
     <string name="choose_gender">Choose Gender</string>
     <string name="select_your_age">Select Your Age</string>
+
+
+    <!--OTP Screen-->
+    <string name="otp_code_text">Co\nde</string>
+    <string name="otp_verification_text">Verification</string>
+    <string name="otp_description_text">Enter one time password sent on \n+62123456789</string>
+    <string name="verify_code">Verify Code</string>
 
 </resources>

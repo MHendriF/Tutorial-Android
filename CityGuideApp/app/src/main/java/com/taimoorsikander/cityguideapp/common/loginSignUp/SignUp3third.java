@@ -2,6 +2,7 @@ package com.taimoorsikander.cityguideapp.common.loginSignUp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,6 +33,13 @@ public class SignUp3third extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SignUp3third.super.onBackPressed();
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUp3third.this, VerifyOTP.class));
             }
         });
     }
