@@ -2,11 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/root_layout"
     tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_click"
@@ -16,7 +21,7 @@
         android:text="@string/action_listener"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:rippleColor="@color/colorPrimary"/>
+        app:rippleColor="@color/colorPrimary" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_snack"
@@ -26,6 +31,12 @@
         android:text="@string/action_listener_snack"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:rippleColor="@color/colorPrimary"/>
+        app:rippleColor="@color/colorPrimary" />
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mainactivity"
+        android:textAlignment="center" />
 </LinearLayout>

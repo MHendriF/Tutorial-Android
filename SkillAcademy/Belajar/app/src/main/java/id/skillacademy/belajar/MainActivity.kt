@@ -2,9 +2,7 @@ package id.skillacademy.belajar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,5 +18,23 @@ class MainActivity : AppCompatActivity() {
         val rootLayout = findViewById<LinearLayout>(R.id.root_layout)
         val btn_snack = findViewById<Button>(R.id.btn_snack)
         btn_snack.setOnClickListener { Snackbar.make(rootLayout, "From Snack", Snackbar.LENGTH_SHORT).show() }
+
+        val tvTitle = findViewById<TextView>(R.id.tv_title)
+        tvTitle.setText("onCreate State")
+
+        val frameLayout = findViewById<FrameLayout>(R.id.fl_main)
+        supportFragmentManager.beginTransaction().replace(R.id.fl_main, MainFragment()).commit()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
