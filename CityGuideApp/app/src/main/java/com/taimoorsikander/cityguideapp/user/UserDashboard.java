@@ -59,7 +59,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
 
-        naviagtionDrawer();
+        navigationDrawer();
 
         featuredRecycler();
         mostViewedRecycler();
@@ -115,7 +115,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_all_categories:
                 startActivity(new Intent(UserDashboard.this, AllCategories.class));
                 break;
@@ -123,17 +123,17 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
-    private void naviagtionDrawer(){
+    private void navigationDrawer() {
 
         //Naviagtion Drawer
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
 
-        menuIcon.setOnClickListener(new View.OnClickListener(){
+        menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(drawerLayout.isDrawerVisible(GravityCompat.START))
+            public void onClick(View view) {
+                if (drawerLayout.isDrawerVisible(GravityCompat.START))
                     drawerLayout.closeDrawer(GravityCompat.START);
                 else drawerLayout.openDrawer(GravityCompat.START);
             }
