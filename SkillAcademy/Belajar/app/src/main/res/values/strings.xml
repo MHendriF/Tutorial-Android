@@ -4,7 +4,9 @@
     <string name="action_listener_snack">Click Snack</string>
     <string name="mainactivity">MainActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="from_main_fragment">From MainFragment</string>
+    <string name="this_constraint_layout">This constraint layout</string>
+    <string name="goto_detail">Go To Detail Activity</string>
+    <string name="input_text">Input text</string>
 </resources>

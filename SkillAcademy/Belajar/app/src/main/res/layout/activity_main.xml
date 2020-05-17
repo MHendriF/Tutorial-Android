@@ -18,9 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="@string/action_listener"
+        android:text="@string/goto_detail"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:textAllCaps="false"
         app:rippleColor="@color/colorPrimary" />
 
     <com.google.android.material.button.MaterialButton

@@ -1,5 +1,6 @@
 package id.skillacademy.belajar
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -13,16 +14,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val button = findViewById<Button>(R.id.btn_click)
-        button.setOnClickListener { Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show() }
+        button.setOnClickListener { startActivity(Intent(this, DetailActivity::class.java)) }
 
         val rootLayout = findViewById<LinearLayout>(R.id.root_layout)
-        val btn_snack = findViewById<Button>(R.id.btn_snack)
-        btn_snack.setOnClickListener { Snackbar.make(rootLayout, "From Snack", Snackbar.LENGTH_SHORT).show() }
+        val btnSnack = findViewById<Button>(R.id.btn_snack)
+        btnSnack.setOnClickListener { Snackbar.make(rootLayout, "From Snack", Snackbar.LENGTH_SHORT).show() }
 
         val tvTitle = findViewById<TextView>(R.id.tv_title)
-        tvTitle.setText("onCreate State")
+        tvTitle.setText("onCreate State Activity")
 
-        val frameLayout = findViewById<FrameLayout>(R.id.fl_main)
         supportFragmentManager.beginTransaction().replace(R.id.fl_main, MainFragment()).commit()
     }
 
