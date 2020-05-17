@@ -5,8 +5,10 @@
     <string name="mainactivity">MainActivity</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="from_main_fragment">From MainFragment</string>
-    <string name="this_constraint_layout">This constraint layout</string>
+    <string name="this_main_fragment">This Main Fragment</string>
+    <string name="this_constraint_layout">This Constraint Layout</string>
     <string name="goto_detail">Go To Detail Activity</string>
     <string name="input_text">Input text</string>
+    <string name="this_custom_view">This Custom View</string>
+    <string name="go_to_custom_activity">Go To Custom Activity</string>
 </resources>

@@ -18,13 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"/>
     
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_custom_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Hello Button"
+        android:text="@string/go_to_custom_activity"
         app:layout_constraintTop_toBottomOf="@id/tv_detail"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_text"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
         android:id="@+id/rv_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_detail"/>
 

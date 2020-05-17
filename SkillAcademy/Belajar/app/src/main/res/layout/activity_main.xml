@@ -21,7 +21,6 @@
         android:text="@string/goto_detail"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textAllCaps="false"
         app:rippleColor="@color/colorPrimary" />
 
     <com.google.android.material.button.MaterialButton

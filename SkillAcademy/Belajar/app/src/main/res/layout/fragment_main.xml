@@ -9,9 +9,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/from_main_fragment"
+        android:text="@string/this_main_fragment"
         android:textAlignment="center"
-        android:layout_margin="8dp"
-        android:textSize="16sp"/>
+        android:layout_margin="15dp"
+        android:textSize="22sp"
+        android:textColor="@color/black"/>
 
 </LinearLayout>
