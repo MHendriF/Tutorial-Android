@@ -1,6 +1,7 @@
-package id.skillacademy.themovie
+package id.skillacademy.mvparchitecture
 
 import com.google.gson.annotations.SerializedName
+
 data class HomeResponse(
     @SerializedName("results")
     val result: List<Result>
