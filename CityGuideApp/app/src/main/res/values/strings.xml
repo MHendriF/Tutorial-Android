@@ -76,4 +76,13 @@
     <string name="otp_description_text">Enter one time password sent on \n+62123456789</string>
     <string name="verify_code">Verify Code</string>
 
+    <string name="forget_password_detail">Provide your accounts email for which your want to reset your password!</string>
+    <string name="enter_email">Email</string>
+    <string name="send_btn">Send</string>
+    <string name="make_selection">Make Selection</string>
+    <string name="make_selection_detail">Selection which contact detail should we use to reset your password?</string>
+    <string name="via_sms">via sms:</string>
+    <string name="via_mail">via mail:</string>
+    <string name="email_value">support@gmail.com</string>
+    <string name="phone_value">+62123456789</string>
 </resources>

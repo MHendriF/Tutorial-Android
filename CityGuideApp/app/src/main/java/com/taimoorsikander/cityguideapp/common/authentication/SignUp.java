@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.common.loginSignUp;
+package com.taimoorsikander.cityguideapp.common.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 

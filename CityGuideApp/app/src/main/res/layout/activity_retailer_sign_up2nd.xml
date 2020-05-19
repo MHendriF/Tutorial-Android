@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="30dp"
-    tools:context=".common.loginSignUp.SignUp2nd">
+    tools:context=".common.authentication.SignUp2nd">
 
     <LinearLayout
         android:id="@+id/ll_login_content"

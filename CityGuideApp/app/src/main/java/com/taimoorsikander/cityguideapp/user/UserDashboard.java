@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.taimoorsikander.cityguideapp.common.loginSignUp.RetailerStartUpScreen;
+import com.taimoorsikander.cityguideapp.common.authentication.RetailerStartUpScreen;
 import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.Categories;
 import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.CategoriesAdapter;
 import com.taimoorsikander.cityguideapp.helperClasses.HomeAdapter.FeaturedAdapter;

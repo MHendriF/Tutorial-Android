@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.common.loginSignUp;
+package com.taimoorsikander.cityguideapp.common.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.taimoorsikander.cityguideapp.R;
-import com.taimoorsikander.cityguideapp.user.AllCategories;
 
 public class Login extends AppCompatActivity {
 
