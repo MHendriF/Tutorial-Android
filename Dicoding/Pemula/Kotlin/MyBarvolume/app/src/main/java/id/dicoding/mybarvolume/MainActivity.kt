@@ -26,43 +26,45 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         tvResult = findViewById(R.id.tv_result)
     }
 
-    override fun onClick(v: View?) {
-        if (v.id == R.id.btn_calculate) {
-            val inputLength = edtLength.text.toString().trim()
-            val inputWidth = edtWidth.text.toString().trim()
-            val inputHeight = edtHeight.text.toString().trim()
-            var isEmptyFields = false
-            var isInvalidDouble = false
-            if (inputLength.isEmpty()) {
-                isEmptyFields = true
-                edtLength.error = "Field ini tidak boleh kosong"
-            }
-            if (inputWidth.isEmpty()) {
-                isEmptyFields = true
-                edtWidth.error = "Field ini tidak boleh kosong"
-            }
-            if (inputHeight.isEmpty()) {
-                isEmptyFields = true
-                edtHeight.error = "Field ini tidak boleh kosong"
-            }
-            val length = toDouble(inputLength)
-            val width = toDouble(inputWidth)
-            val height = toDouble(inputHeight)
-            if (length == null) {
-                isInvalidDouble = true
-                edtLength.error = "Field ini harus berupa nomer yang valid"
-            }
-            if (width == null) {
-                isInvalidDouble = true
-                edtWidth.error = "Field ini harus berupa nomer yang valid"
-            }
-            if (height == null) {
-                isInvalidDouble = true
-                edtHeight.error = "Field ini harus berupa nomer yang valid"
-            }
-            if (!isEmptyFields && !isInvalidDouble) {
-                val volume = length as Double * width as Double * height as Double
-                tvResult.text = volume.toString()
+    override fun onClick(view: View?) {
+        if (view != null) {
+            if (view.id == R.id.btn_calculate) {
+                val inputLength = edtLength.text.toString().trim()
+                val inputWidth = edtWidth.text.toString().trim()
+                val inputHeight = edtHeight.text.toString().trim()
+                var isEmptyFields = false
+                var isInvalidDouble = false
+                if (inputLength.isEmpty()) {
+                    isEmptyFields = true
+                    edtLength.error = "Field ini tidak boleh kosong"
+                }
+                if (inputWidth.isEmpty()) {
+                    isEmptyFields = true
+                    edtWidth.error = "Field ini tidak boleh kosong"
+                }
+                if (inputHeight.isEmpty()) {
+                    isEmptyFields = true
+                    edtHeight.error = "Field ini tidak boleh kosong"
+                }
+                val length = toDouble(inputLength)
+                val width = toDouble(inputWidth)
+                val height = toDouble(inputHeight)
+                if (length == null) {
+                    isInvalidDouble = true
+                    edtLength.error = "Field ini harus berupa nomer yang valid"
+                }
+                if (width == null) {
+                    isInvalidDouble = true
+                    edtWidth.error = "Field ini harus berupa nomer yang valid"
+                }
+                if (height == null) {
+                    isInvalidDouble = true
+                    edtHeight.error = "Field ini harus berupa nomer yang valid"
+                }
+                if (!isEmptyFields && !isInvalidDouble) {
+                    val volume = length as Double * width as Double * height as Double
+                    tvResult.text = volume.toString()
+                }
             }
         }
     }
