@@ -1,18 +1,15 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.presentation
 
-import android.util.Log
-import android.view.View
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
+import id.skillacademy.mvparchitecture.data.HomeDataSource
+import id.skillacademy.mvparchitecture.data.HomeResponse
 import retrofit2.Call
 import retrofit2.Callback
 
-class HomePresenter(private val view: HomeView) {
+class HomePresenter(private val view: HomeView, private val dataSource: HomeDataSource) {
 
     fun discoverMovie() {
         view.onShowLoading()
 
-        val dataSource = NetworkProvider.providesHttpAdapter().create(HomeDataSource::class.java)
         dataSource.discoverMovie().enqueue(object : Callback<HomeResponse> {
             override fun onResponse(
                 call: Call<HomeResponse>,

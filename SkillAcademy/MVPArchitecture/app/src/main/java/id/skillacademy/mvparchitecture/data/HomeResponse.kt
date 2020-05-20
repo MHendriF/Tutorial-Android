@@ -1,4 +1,4 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.data
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,5 +1,6 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.data
 
+import id.skillacademy.mvparchitecture.BuildConfig
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

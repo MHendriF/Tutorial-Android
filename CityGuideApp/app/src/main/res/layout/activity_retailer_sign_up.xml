@@ -111,7 +111,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_username"
+                android:hint="@string/enter_password"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconTint="@color/black"
@@ -152,7 +152,8 @@
             android:background="#00000000"
             android:text="@string/login"
             android:textColor="@color/black"
-            android:transitionName="transition_login_btn" />
+            android:transitionName="transition_login_btn"
+            android:onClick="callLoginScreen"/>
 
     </LinearLayout>
 

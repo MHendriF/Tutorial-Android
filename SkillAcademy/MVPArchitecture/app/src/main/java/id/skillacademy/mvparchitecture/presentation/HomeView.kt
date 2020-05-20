@@ -1,4 +1,6 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.presentation
+
+import id.skillacademy.mvparchitecture.data.Result
 
 interface HomeView {
     fun onShowLoading()

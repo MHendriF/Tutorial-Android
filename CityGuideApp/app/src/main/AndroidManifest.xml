@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".common.authentication.MakeSelection"></activity>
+        <activity android:name=".common.authentication.ForgetPasswordSuccessMessage"></activity>
+        <activity android:name=".common.authentication.SetNewPassword" />
+        <activity android:name=".common.authentication.MakeSelection" />
         <activity android:name=".common.authentication.ForgetPassword" />
         <activity android:name=".common.authentication.VerifyOTP" />
         <activity android:name=".common.authentication.SignUp3third" />

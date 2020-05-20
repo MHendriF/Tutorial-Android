@@ -1,30 +1,41 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.di.builder.module
 
+import dagger.Module
+import dagger.Provides
+import id.skillacademy.mvparchitecture.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-object NetworkProvider {
+@Module
+object NetworkModule {
 
-    fun providesHttpAdapter(): Retrofit {
+    @Provides
+    @Singleton
+    fun providesHttpAdapter(client: OkHttpClient): Retrofit {
         return Retrofit.Builder().apply {
-            client(providesHttpClient())
+            client(client)
             baseUrl(BuildConfig.TMDB_BASE_URL)
             addConverterFactory(GsonConverterFactory.create())
         }.build()
     }
 
-    private fun providesHttpClient(): OkHttpClient {
+    @Provides
+    @Singleton
+    fun providesHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder().apply {
             retryOnConnectionFailure(true)
-            addInterceptor(providesHttpLoggingInterceptor())
+            addInterceptor(interceptor)
         }.build()
     }
 
-    private fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
+    @Provides
+    @Singleton
+    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = when(BuildConfig.DEBUG) {
+            level = when (BuildConfig.DEBUG) {
                 true -> HttpLoggingInterceptor.Level.BODY
                 false -> HttpLoggingInterceptor.Level.NONE
             }

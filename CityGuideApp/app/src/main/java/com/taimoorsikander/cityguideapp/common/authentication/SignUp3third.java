@@ -36,11 +36,9 @@ public class SignUp3third extends AppCompatActivity {
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignUp3third.this, VerifyOTP.class));
-            }
-        });
+    }
+
+    public void callMakeSelectionScreen(View view) {
+        startActivity(new Intent(this, MakeSelection.class));
     }
 }

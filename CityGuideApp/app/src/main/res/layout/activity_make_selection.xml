@@ -23,6 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/muli_black"
             android:text="@string/make_selection"
             android:textAllCaps="true"
@@ -43,41 +44,42 @@
             android:layout_marginTop="50dp"
             android:background="@color/lightWhite"
             android:padding="10dp">
-            
+
             <ImageView
                 android:id="@+id/iv_mobile_icon"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/smartphone"/>
+                android:src="@drawable/smartphone" />
 
             <TextView
                 android:id="@+id/tv_mobile_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@id/iv_mobile_icon"
                 android:fontFamily="@font/muli_light"
                 android:text="@string/via_sms"
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:layout_marginTop="30dp"
-                android:layout_toRightOf="@id/iv_mobile_icon"/>
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/tv_mobile_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_mobile_title"
+                android:layout_toRightOf="@id/iv_mobile_icon"
                 android:fontFamily="@font/muli_light"
                 android:text="@string/phone_value"
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:layout_toRightOf="@id/iv_mobile_icon"
-                android:layout_below="@id/tv_mobile_title"/>
+                android:textSize="20sp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"/>
+                android:background="@color/transparent"
+                android:onClick="callVerifyOTPScreen" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -93,34 +95,35 @@
                 android:layout_height="70dp"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/envelope"/>
+                android:src="@drawable/envelope" />
 
             <TextView
                 android:id="@+id/tv_mail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@id/iv_mail_icon"
                 android:fontFamily="@font/muli_light"
                 android:text="@string/via_mail"
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:layout_marginTop="30dp"
-                android:layout_toEndOf="@id/iv_mail_icon"/>
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/tv_mail_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_mail_title"
+                android:layout_toEndOf="@id/iv_mail_icon"
                 android:fontFamily="@font/muli_light"
                 android:text="@string/email_value"
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:layout_toEndOf="@id/iv_mail_icon"
-                android:layout_below="@id/tv_mail_title"/>
+                android:textSize="20sp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"/>
+                android:background="@color/transparent"
+                android:onClick="callVerifyOTPScreen" />
         </RelativeLayout>
 
     </LinearLayout>

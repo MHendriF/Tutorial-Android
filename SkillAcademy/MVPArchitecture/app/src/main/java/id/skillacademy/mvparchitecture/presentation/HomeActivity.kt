@@ -1,19 +1,24 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
+import id.skillacademy.mvparchitecture.R
+import id.skillacademy.mvparchitecture.data.Result
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HomeView {
+class HomeActivity : AppCompatActivity(), HomeView {
+
+    @Inject
+    lateinit var presenter: HomePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val presenter = HomePresenter(this)
         presenter.discoverMovie()
     }
 
@@ -27,11 +32,11 @@ class MainActivity : AppCompatActivity(), HomeView {
     }
 
     override fun onResponse(results: List<Result>) {
-        rv_home.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+        rv_home.addItemDecoration(DividerItemDecoration(this@HomeActivity, DividerItemDecoration.VERTICAL))
         rv_home.adapter = HomeAdapter(results)
     }
 
     override fun onFailure(error: Throwable) {
-        Log.e(MainActivity::class.java.simpleName, "${error.printStackTrace()}")
+        Log.e(HomeActivity::class.java.simpleName, "${error.printStackTrace()}")
     }
 }

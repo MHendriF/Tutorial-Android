@@ -80,9 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/black"
-            android:text="@string/next_btn"
+            android:text="@string/submit_btn"
             android:textColor="@color/white"
-            android:transitionName="transition_next_btn" />
+            android:transitionName="transition_next_btn"
+            android:onClick="callMakeSelectionScreen"/>
 
         <Button
             android:id="@+id/btn_login"

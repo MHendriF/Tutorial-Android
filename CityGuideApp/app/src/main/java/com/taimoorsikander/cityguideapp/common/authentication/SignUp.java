@@ -52,4 +52,8 @@ public class SignUp extends AppCompatActivity {
         startActivity(intent, options.toBundle());
     }
 
+    public void callLoginScreen(View view) {
+        startActivity(new Intent(this, Login.class));
+    }
+
 }

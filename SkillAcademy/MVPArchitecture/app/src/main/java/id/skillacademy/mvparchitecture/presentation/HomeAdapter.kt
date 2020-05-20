@@ -1,10 +1,12 @@
-package id.skillacademy.mvparchitecture
+package id.skillacademy.mvparchitecture.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import id.skillacademy.mvparchitecture.R
+import id.skillacademy.mvparchitecture.data.Result
 
 class HomeAdapter(private val results: List<Result>): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
