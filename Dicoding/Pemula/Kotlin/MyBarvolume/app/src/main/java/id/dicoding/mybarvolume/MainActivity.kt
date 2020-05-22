@@ -15,15 +15,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnCalculate: Button
     private lateinit var tvResult: TextView
 
+    companion object {
+        private const val STATE_RESULT = "state_result"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState != null) {
+            val result = savedInstanceState.getString(STATE_RESULT) as String
+            tvResult.text = result
+        }
 
         edtWidth = findViewById(R.id.edt_width)
         edtHeight = findViewById(R.id.edt_height)
         edtLength = findViewById(R.id.edt_length)
         btnCalculate = findViewById(R.id.btn_calculate)
         tvResult = findViewById(R.id.tv_result)
+
+        btnCalculate.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -76,6 +87,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             null
         }
     }
-
 
 }
