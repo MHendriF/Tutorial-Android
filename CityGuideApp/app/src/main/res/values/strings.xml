@@ -90,8 +90,14 @@
     <string name="new_credentials_detail">Your identity has been verified! Set your new password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="password_update">Password Updated</string>
     <string name="password_update_messagge">Your Password Has Been Updated!</string>
     <string name="submit_btn">Submit</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

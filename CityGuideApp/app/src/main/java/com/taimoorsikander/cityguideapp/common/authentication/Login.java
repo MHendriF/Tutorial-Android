@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void callSingUpScreen(View view) {
-        startActivity(new Intent(this, SignUp.class));
+        startActivity(new Intent(this, SignUpStep1.class));
     }
 
     public void callDashboardScreen(View view) {

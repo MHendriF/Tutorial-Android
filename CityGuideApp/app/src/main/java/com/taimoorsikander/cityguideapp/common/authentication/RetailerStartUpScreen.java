@@ -31,7 +31,7 @@ public class RetailerStartUpScreen extends AppCompatActivity {
     }
 
     public void callSingUpScreen(View view) {
-        Intent intent = new Intent(getApplicationContext(), SignUp.class);
+        Intent intent = new Intent(getApplicationContext(), SignUpStep1.class);
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(findViewById(R.id.btn_sign_up), "transition_sign_up");

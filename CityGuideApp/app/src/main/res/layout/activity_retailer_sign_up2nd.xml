@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:padding="30dp"
-    tools:context=".common.authentication.SignUp2nd">
+    tools:context=".common.authentication.SignUpStep2">
 
     <LinearLayout
         android:id="@+id/ll_login_content"
@@ -48,6 +47,7 @@
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:id="@+id/radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -55,22 +55,22 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male" />
+                    android:text="@string/male" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female" />
+                    android:text="@string/female" />
 
                 <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/others"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Other" />
+                    android:text="@string/other" />
             </RadioGroup>
 
             <View
@@ -88,6 +88,7 @@
                 android:textSize="18sp" />
 
             <DatePicker
+                android:id="@+id/age_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:calendarViewShown="false"
