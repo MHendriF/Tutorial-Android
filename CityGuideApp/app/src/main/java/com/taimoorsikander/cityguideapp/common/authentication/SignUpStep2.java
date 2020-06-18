@@ -56,16 +56,26 @@ public class SignUpStep2 extends AppCompatActivity {
             return;
         }
 
+        String _fullName = getIntent().getStringExtra("fullName");
+        String _email = getIntent().getStringExtra("email");
+        String _username = getIntent().getStringExtra("username");
+        String _password = getIntent().getStringExtra("password");
+
         selectedGender = findViewById(radioGroup.getCheckedRadioButtonId());
         String _gender = selectedGender.getText().toString();
 
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year = datePicker.getYear();
-
         String _date = day+"/"+month+"/"+year;
 
         Intent intent = new Intent(getApplicationContext(), SignUpStep3.class);
+        intent.putExtra("fullName", _fullName);
+        intent.putExtra("email", _email);
+        intent.putExtra("username", _username);
+        intent.putExtra("password", _password);
+        intent.putExtra("date", _date);
+        intent.putExtra("gender", _gender);
 
         Pair[] pairs = new Pair[4];
         pairs[0] = new Pair<View, String>(btnBack, "transition_back_arrow_btn");

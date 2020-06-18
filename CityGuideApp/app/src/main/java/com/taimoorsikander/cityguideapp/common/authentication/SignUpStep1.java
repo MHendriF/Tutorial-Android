@@ -52,7 +52,16 @@ public class SignUpStep1 extends AppCompatActivity {
             return;
         }
 
+        String _fullName = fullName.getEditText().getText().toString().trim();
+        String _email = email.getEditText().getText().toString().trim();
+        String _username = username.getEditText().getText().toString().trim();
+        String _password = password.getEditText().getText().toString().trim();
+
         Intent intent = new Intent(SignUpStep1.this, SignUpStep2.class);
+        intent.putExtra("fullName", _fullName);
+        intent.putExtra("email", _email);
+        intent.putExtra("username", _username);
+        intent.putExtra("password", _password);
 
         Pair[] pairs = new Pair[4];
         pairs[0] = new Pair<View, String>(btnBack, "transition_back_arrow_btn");
@@ -125,7 +134,7 @@ public class SignUpStep1 extends AppCompatActivity {
 //                "(?=.*[a-z])" +         //at least 1 lower case letter
 //                "(?=.*[A-Z])" +         //at least 1 upper case letter
                 "(?=.*[a-zA-Z])" +      //any letter
-                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+//                "(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white space
                 ".{4,}" +               //at least 4 character
                 "$";
