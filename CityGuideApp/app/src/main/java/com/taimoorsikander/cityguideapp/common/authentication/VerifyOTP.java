@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -20,14 +21,18 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.taimoorsikander.cityguideapp.R;
 
 import java.util.concurrent.TimeUnit;
 
 public class VerifyOTP extends AppCompatActivity {
 
+    TextView tvPhoneNumber;
     PinView pinFromUser;
     String codeBySystem;
+    String fullName, username, email, password, date, gender, phoneNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +41,18 @@ public class VerifyOTP extends AppCompatActivity {
         setContentView(R.layout.activity_verify_o_t_p);
 
         pinFromUser = findViewById(R.id.pin_view);
+        tvPhoneNumber = findViewById(R.id.tv_phone_number);
 
-        String _phoneNumber = getIntent().getStringExtra("phoneNumber");
+        fullName = getIntent().getStringExtra("fullName");
+        email = getIntent().getStringExtra("email");
+        username = getIntent().getStringExtra("username");
+        password = getIntent().getStringExtra("password");
+        date = getIntent().getStringExtra("date");
+        gender = getIntent().getStringExtra("gender");
+        phoneNo = getIntent().getStringExtra("phoneNumber");
 
-        sendVerificationCode(_phoneNumber);
+        tvPhoneNumber.setText(phoneNo);
+        sendVerificationCode(phoneNo);
     }
 
     private void sendVerificationCode(String phoneNumber) {
@@ -88,16 +101,25 @@ public class VerifyOTP extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            storeNewUsersData();
                             Toast.makeText(VerifyOTP.this, "Verification completed.", Toast.LENGTH_SHORT).show();
 
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(VerifyOTP.this, "Verification not completed! Try again.", Toast.LENGTH_SHORT).show();
-                                // The verification code entered was invalid
+
                             }
                         }
                     }
                 });
+    }
+
+    private void storeNewUsersData() {
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        DatabaseReference reference = rootNode.getReference("Users");
+
+        reference.setValue("First record!");
     }
 
     public void callNextScreenFromOTP(View view) {
