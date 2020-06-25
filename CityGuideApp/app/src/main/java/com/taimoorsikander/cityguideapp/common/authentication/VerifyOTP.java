@@ -24,6 +24,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.taimoorsikander.cityguideapp.R;
+import com.taimoorsikander.cityguideapp.databases.UserHelperClass;
 
 import java.util.concurrent.TimeUnit;
 
@@ -119,7 +120,8 @@ public class VerifyOTP extends AppCompatActivity {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("Users");
 
-        reference.setValue("First record!");
+        UserHelperClass addNewUser =  new UserHelperClass(fullName, username, email, password, date, gender, phoneNo);
+        reference.child(phoneNo).setValue(addNewUser);
     }
 
     public void callNextScreenFromOTP(View view) {
