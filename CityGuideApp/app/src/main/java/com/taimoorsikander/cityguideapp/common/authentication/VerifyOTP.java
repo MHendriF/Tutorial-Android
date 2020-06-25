@@ -3,6 +3,7 @@ package com.taimoorsikander.cityguideapp.common.authentication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,7 @@ public class VerifyOTP extends AppCompatActivity {
     TextView tvPhoneNumber;
     PinView pinFromUser;
     String codeBySystem;
-    String fullName, username, email, password, date, gender, phoneNo;
+    String fullName, username, email, password, date, gender, phoneNo, whatToDo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class VerifyOTP extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         gender = getIntent().getStringExtra("gender");
         phoneNo = getIntent().getStringExtra("phoneNumber");
+        whatToDo = getIntent().getStringExtra("whatToDo");
 
         tvPhoneNumber.setText(phoneNo);
         sendVerificationCode(phoneNo);
@@ -76,7 +78,7 @@ public class VerifyOTP extends AppCompatActivity {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                     String code = phoneAuthCredential.getSmsCode();
-                    if (code != null){
+                    if (code != null) {
                         pinFromUser.setText(code);
                         verifyCode(code);
                     }
@@ -103,8 +105,11 @@ public class VerifyOTP extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            storeNewUsersData();
-                            Toast.makeText(VerifyOTP.this, "Verification completed.", Toast.LENGTH_SHORT).show();
+                            if (whatToDo.equals("updateData")) {
+                                updateUsersData();
+                            } else {
+                                storeNewUsersData();
+                            }
 
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -116,17 +121,24 @@ public class VerifyOTP extends AppCompatActivity {
                 });
     }
 
+    private void updateUsersData() {
+        Intent intent = new Intent(getApplicationContext(), SetNewPassword.class);
+        intent.putExtra("phoneNo", phoneNo);
+        startActivity(intent);
+        finish();
+    }
+
     private void storeNewUsersData() {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("Users");
 
-        UserHelperClass addNewUser =  new UserHelperClass(fullName, username, email, password, date, gender, phoneNo);
+        UserHelperClass addNewUser = new UserHelperClass(fullName, username, email, password, date, gender, phoneNo);
         reference.child(phoneNo).setValue(addNewUser);
     }
 
     public void callNextScreenFromOTP(View view) {
         String code = pinFromUser.getText().toString();
-        if (!code.isEmpty()){
+        if (!code.isEmpty()) {
             verifyCode(code);
         }
     }

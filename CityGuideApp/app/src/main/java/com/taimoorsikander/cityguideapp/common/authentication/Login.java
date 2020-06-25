@@ -27,7 +27,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 import com.taimoorsikander.cityguideapp.R;
-import com.taimoorsikander.cityguideapp.user.UserDashboard;
+import com.taimoorsikander.cityguideapp.helperClasses.CheckInternet;
 
 public class Login extends AppCompatActivity {
 
@@ -36,7 +36,6 @@ public class Login extends AppCompatActivity {
     CountryCodePicker countryCodePicker;
     Button btnLogin, btnSignUp;
     RelativeLayout progressbar;
-    String TAG = "Trace Login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnSignUp = findViewById(R.id.btn_sign_up);
         progressbar = findViewById(R.id.login_progressbar);
-        progressbar.setVisibility(View.GONE);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,100 +68,63 @@ public class Login extends AppCompatActivity {
     }
 
     public void letTheUserLoggedIn(View view) {
+        CheckInternet checkInternet = new CheckInternet();
+        if (!checkInternet.isConnected(this)) {
+            checkInternet.showCustomDialog(this);
+        } else {
+            if (!validateFields()) {
+                return;
+            }
+            progressbar.setVisibility(View.VISIBLE);
 
-        if (!isConnected(Login.this)) {
-            showCustomDialog();
-        }
+            //get data
+            String _getPhoneNumber = phoneNumber.getEditText().getText().toString().trim();
+            final String _password = password.getEditText().getText().toString().trim();
 
-        if (!validateFields()) {
-            return;
-        }
-        progressbar.setVisibility(View.VISIBLE);
+            if (_getPhoneNumber.charAt(0) == '0') {
+                _getPhoneNumber = _getPhoneNumber.substring(1);
+            }
+            final String _phoneNumber = "+" + countryCodePicker.getFullNumber() + _getPhoneNumber;
 
-        //get data
-        String _getPhoneNumber = phoneNumber.getEditText().getText().toString().trim();
-        final String _password = password.getEditText().getText().toString().trim();
+            //database
+            Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("phoneNo").equalTo(_phoneNumber);
+            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        phoneNumber.setError(null);
+                        phoneNumber.setErrorEnabled(false);
 
-        if (_getPhoneNumber.charAt(0) == '0') {
-            _getPhoneNumber = _getPhoneNumber.substring(1);
-        }
-        final String _phoneNumber = "+" + countryCodePicker.getFullNumber() + _getPhoneNumber;
+                        String systemPassword = dataSnapshot.child(_phoneNumber).child("password").getValue(String.class);
+                        if (systemPassword.equals(_password)) {
+                            password.setError(null);
+                            password.setErrorEnabled(false);
 
-        //database
-        Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("phoneNo").equalTo(_phoneNumber);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    phoneNumber.setError(null);
-                    phoneNumber.setErrorEnabled(false);
+                            String _fullName = dataSnapshot.child(_phoneNumber).child("fullName").getValue(String.class);
+                            String _email = dataSnapshot.child(_phoneNumber).child("email").getValue(String.class);
+                            String _phoneNo = dataSnapshot.child(_phoneNumber).child("phoneNo").getValue(String.class);
+                            String _date = dataSnapshot.child(_phoneNumber).child("date").getValue(String.class);
 
-                    String systemPassword = dataSnapshot.child(_phoneNumber).child("password").getValue(String.class);
-                    if (systemPassword.equals(_password)) {
-                        password.setError(null);
-                        password.setErrorEnabled(false);
+                            progressbar.setVisibility(View.GONE);
+                            Toast.makeText(Login.this, _fullName + "\n" + _email + "\n" + _phoneNo + "\n" + _date, Toast.LENGTH_SHORT).show();
 
-                        String _fullName =  dataSnapshot.child(_phoneNumber).child("fullName").getValue(String.class);
-                        String _email =  dataSnapshot.child(_phoneNumber).child("email").getValue(String.class);
-                        String _phoneNo =  dataSnapshot.child(_phoneNumber).child("phoneNo").getValue(String.class);
-                        String _date =  dataSnapshot.child(_phoneNumber).child("date").getValue(String.class);
-
-                        progressbar.setVisibility(View.GONE);
-                        Toast.makeText(Login.this, _fullName+"\n"+_email+"\n"+_phoneNo+"\n"+_date, Toast.LENGTH_SHORT).show();
-
+                        } else {
+                            progressbar.setVisibility(View.GONE);
+                            Toast.makeText(Login.this, "Password does not match!", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         progressbar.setVisibility(View.GONE);
-                        Toast.makeText(Login.this, "Password does not match!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "No such user exist!", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    progressbar.setVisibility(View.GONE);
-                    Toast.makeText(Login.this, "No such user exist!", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                progressbar.setVisibility(View.GONE);
-                Toast.makeText(Login.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-    private boolean isConnected(Login login) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-        if ((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected())){
-            return true;
-        }else{
-            return false;
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    progressbar.setVisibility(View.GONE);
+                    Toast.makeText(Login.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-    }
-
-    private void showCustomDialog() {
-        progressbar.setVisibility(View.GONE);
-        Log.d(TAG, "showCustomDialog: ");
-        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-        builder.setMessage("Please connect to the internet to proceed further")
-                .setCancelable(false)
-                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(getApplicationContext(), RetailerStartUpScreen.class));
-                        finish();
-                    }
-                });
-        AlertDialog alertDialog = builder.create();
-        // Show the Alert Dialog box
-        alertDialog.show();
     }
 
     private boolean validateFields() {
