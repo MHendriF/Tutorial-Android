@@ -33,7 +33,7 @@ public class SignUpStep2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_retailer_sign_up2nd);
+        setContentView(R.layout.activity_retailer_sign_up_step2);
 
         btnBack = findViewById(R.id.iv_back_button);
         tvTitle = findViewById(R.id.tv_title);
