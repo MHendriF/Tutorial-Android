@@ -1,10 +1,17 @@
 package com.taimoorsikander.cityguideapp.common.authentication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -29,6 +36,7 @@ public class Login extends AppCompatActivity {
     CountryCodePicker countryCodePicker;
     Button btnLogin, btnSignUp;
     RelativeLayout progressbar;
+    String TAG = "Trace Login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +70,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void letTheUserLoggedIn(View view) {
+
+        if (!isConnected(Login.this)) {
+            showCustomDialog();
+        }
+
         if (!validateFields()) {
             return;
         }
@@ -114,6 +127,43 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    private boolean isConnected(Login login) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if ((wifiConn != null && wifiConn.isConnected()) || (mobileConn != null && mobileConn.isConnected())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private void showCustomDialog() {
+        progressbar.setVisibility(View.GONE);
+        Log.d(TAG, "showCustomDialog: ");
+        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+        builder.setMessage("Please connect to the internet to proceed further")
+                .setCancelable(false)
+                .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(), RetailerStartUpScreen.class));
+                        finish();
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        // Show the Alert Dialog box
+        alertDialog.show();
     }
 
     private boolean validateFields() {
