@@ -1,17 +1,10 @@
 package com.taimoorsikander.cityguideapp.common.authentication;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -27,7 +20,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 import com.taimoorsikander.cityguideapp.R;
-import com.taimoorsikander.cityguideapp.helperClasses.CheckInternet;
+import com.taimoorsikander.cityguideapp.databases.CheckInternet;
+import com.taimoorsikander.cityguideapp.databases.SessionManager;
+import com.taimoorsikander.cityguideapp.locationOwner.RetailerDashboard;
 
 public class Login extends AppCompatActivity {
 
@@ -102,8 +97,16 @@ public class Login extends AppCompatActivity {
 
                             String _fullName = dataSnapshot.child(_phoneNumber).child("fullName").getValue(String.class);
                             String _email = dataSnapshot.child(_phoneNumber).child("email").getValue(String.class);
+                            String _password = dataSnapshot.child(_phoneNumber).child("password").getValue(String.class);
                             String _phoneNo = dataSnapshot.child(_phoneNumber).child("phoneNo").getValue(String.class);
                             String _date = dataSnapshot.child(_phoneNumber).child("date").getValue(String.class);
+                            String _username = dataSnapshot.child(_phoneNumber).child("username").getValue(String.class);
+                            String _gender = dataSnapshot.child(_phoneNumber).child("gender").getValue(String.class);
+
+                            SessionManager sessionManager = new SessionManager(Login.this);
+                            sessionManager.createLoginSession(_fullName, _username, _email, _password, _date, _gender, _phoneNo);
+
+                            startActivity(new Intent(getApplicationContext(), RetailerDashboard.class));
 
                             progressbar.setVisibility(View.GONE);
                             Toast.makeText(Login.this, _fullName + "\n" + _email + "\n" + _phoneNo + "\n" + _date, Toast.LENGTH_SHORT).show();

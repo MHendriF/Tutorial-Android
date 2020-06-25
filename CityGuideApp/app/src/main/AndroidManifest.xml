@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".common.authentication.ForgetPasswordSuccessMessage"/>
+        <activity android:name=".locationOwner.RetailerDashboard"></activity>
+        <activity android:name=".common.authentication.ForgetPasswordSuccessMessage" />
         <activity android:name=".common.authentication.SetNewPassword" />
         <activity android:name=".common.authentication.MakeSelection" />
         <activity android:name=".common.authentication.ForgetPassword" />

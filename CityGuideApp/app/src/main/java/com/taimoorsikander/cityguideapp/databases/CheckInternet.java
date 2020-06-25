@@ -1,4 +1,4 @@
-package com.taimoorsikander.cityguideapp.helperClasses;
+package com.taimoorsikander.cityguideapp.databases;
 
 import android.app.Activity;
 import android.content.Context;

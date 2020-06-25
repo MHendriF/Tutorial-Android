@@ -1,14 +1,10 @@
 package com.taimoorsikander.cityguideapp.common.authentication;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -23,7 +19,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 import com.taimoorsikander.cityguideapp.R;
-import com.taimoorsikander.cityguideapp.helperClasses.CheckInternet;
+import com.taimoorsikander.cityguideapp.databases.CheckInternet;
 
 public class ForgetPassword extends AppCompatActivity {
 
