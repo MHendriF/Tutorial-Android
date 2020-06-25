@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,8 @@ import com.taimoorsikander.cityguideapp.databases.CheckInternet;
 import com.taimoorsikander.cityguideapp.databases.SessionManager;
 import com.taimoorsikander.cityguideapp.locationOwner.RetailerDashboard;
 
+import java.util.HashMap;
+
 public class Login extends AppCompatActivity {
 
     ImageView btnBack;
@@ -31,6 +35,8 @@ public class Login extends AppCompatActivity {
     CountryCodePicker countryCodePicker;
     Button btnLogin, btnSignUp;
     RelativeLayout progressbar;
+    CheckBox rememberMe;
+    TextInputEditText edtPhoneNumber, edtPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,17 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.login_password);
         btnLogin = findViewById(R.id.btn_login);
         btnSignUp = findViewById(R.id.btn_sign_up);
-        progressbar = findViewById(R.id.login_progressbar);
+        progressbar = findViewById(R.id.progressbar);
+        rememberMe = findViewById(R.id.cb_remember_me);
+        edtPhoneNumber = findViewById(R.id.edt_phone_number);
+        edtPassword = findViewById(R.id.edt_password);
+
+        SessionManager sessionManager = new SessionManager(Login.this, SessionManager.SESSION_REMEMBER_ME);
+        if (sessionManager.checkRememberMe()){
+            HashMap<String, String> rememberMeDetails = sessionManager.getRememberMeFromSession();
+            edtPhoneNumber.setText(rememberMeDetails.get(SessionManager.KEY_SESSION_PHONE_NUMBER));
+            edtPassword.setText(rememberMeDetails.get(SessionManager.KEY_SESSION_PASSWORD));
+        }
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +97,11 @@ public class Login extends AppCompatActivity {
             }
             final String _phoneNumber = "+" + countryCodePicker.getFullNumber() + _getPhoneNumber;
 
+            if (rememberMe.isChecked()){
+                SessionManager sessionManager = new SessionManager(Login.this, SessionManager.SESSION_REMEMBER_ME);
+                sessionManager.createRememberMeSession(_getPhoneNumber, _password);
+            }
+
             //database
             Query checkUser = FirebaseDatabase.getInstance().getReference("Users").orderByChild("phoneNo").equalTo(_phoneNumber);
             checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,7 +124,7 @@ public class Login extends AppCompatActivity {
                             String _username = dataSnapshot.child(_phoneNumber).child("username").getValue(String.class);
                             String _gender = dataSnapshot.child(_phoneNumber).child("gender").getValue(String.class);
 
-                            SessionManager sessionManager = new SessionManager(Login.this);
+                            SessionManager sessionManager = new SessionManager(Login.this, SessionManager.SESSION_USER);
                             sessionManager.createLoginSession(_fullName, _username, _email, _password, _date, _gender, _phoneNo);
 
                             startActivity(new Intent(getApplicationContext(), RetailerDashboard.class));
