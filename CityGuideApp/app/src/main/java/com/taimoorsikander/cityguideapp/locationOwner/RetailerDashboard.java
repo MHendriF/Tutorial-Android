@@ -1,10 +1,12 @@
 package com.taimoorsikander.cityguideapp.locationOwner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.taimoorsikander.cityguideapp.R;
 import com.taimoorsikander.cityguideapp.databases.SessionManager;
 
@@ -12,19 +14,37 @@ import java.util.HashMap;
 
 public class RetailerDashboard extends AppCompatActivity {
 
+    ChipNavigationBar chipNavigationBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retailer_dashboard);
 
-        TextView textView = findViewById(R.id.textview);
+        chipNavigationBar = findViewById(R.id.bottom_nav_menu);
+        chipNavigationBar.setItemSelected(R.id.bottom_nav_dashboard, true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RetailerDashboardFragment()).commit();
+        bottomMenu();
+    }
 
-        SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-        HashMap<String, String> userDetails = sessionManager.getUserDetailFromSession();
-
-        String _fullName = userDetails.get(SessionManager.KEY_FULLNAME);
-        String _phoneNumber = userDetails.get(SessionManager.KEY_PHONE_NUMBER);
-
-        textView.setText(_fullName+"\n"+_phoneNumber);
+    private void bottomMenu() {
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                Fragment fragment = null;
+                switch (i){
+                    case R.id.bottom_nav_dashboard:
+                        fragment = new RetailerDashboardFragment();
+                        break;
+                    case R.id.bottom_nav_manage:
+                        fragment = new RetailerManageFragment();
+                        break;
+                    case R.id.bottom_nav_profile:
+                        fragment = new RetailerProfileFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            }
+        });
     }
 }

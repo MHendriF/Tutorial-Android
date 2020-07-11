@@ -69,7 +69,6 @@
     <string name="choose_gender">Choose Gender</string>
     <string name="select_your_age">Select Your Age</string>
 
-
     <!--OTP Screen-->
     <string name="otp_code_text">Co\nde</string>
     <string name="otp_verification_text">Verification</string>
@@ -100,4 +99,6 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="manage">Manage</string>
 </resources>
