@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -15,14 +17,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dicoding.mynotesapp.db.NoteHelper;
 import com.dicoding.mynotesapp.entity.Note;
+import com.dicoding.mynotesapp.helper.MappingHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.dicoding.mynotesapp.db.DatabaseContract.NoteColumns.CONTENT_URI;
 import static com.dicoding.mynotesapp.db.DatabaseContract.NoteColumns.DATE;
 import static com.dicoding.mynotesapp.db.DatabaseContract.NoteColumns.DESCRIPTION;
 import static com.dicoding.mynotesapp.db.DatabaseContract.NoteColumns.TITLE;
@@ -34,7 +37,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity implements View.OnC
     private boolean isEdit = false;
     private Note note;
     private int position;
-    private NoteHelper noteHelper;
+    private Uri uriWithId;
 
     public static final String EXTRA_NOTE = "extra_note";
     public static final String EXTRA_POSITION = "extra_position";
@@ -54,7 +57,7 @@ public class NoteAddUpdateActivity extends AppCompatActivity implements View.OnC
         edtTitle = findViewById(R.id.edt_title);
         edtDescription = findViewById(R.id.edt_description);
         btnSubmit = findViewById(R.id.btn_submit);
-        noteHelper = NoteHelper.getInstance(getApplicationContext());
+
         note = getIntent().getParcelableExtra(EXTRA_NOTE);
         if (note != null) {
             position = getIntent().getIntExtra(EXTRA_POSITION, 0);
@@ -66,6 +69,17 @@ public class NoteAddUpdateActivity extends AppCompatActivity implements View.OnC
         String actionBarTitle;
         String btnTitle;
         if (isEdit) {
+            // Uri yang di dapatkan disini akan digunakan untuk ambil data dari provider
+            // content://com.dicoding.picodiploma.mynotesapp/note/id
+            uriWithId = Uri.parse(CONTENT_URI + "/" + note.getId());
+            if (uriWithId != null) {
+                Cursor cursor = getContentResolver().query(uriWithId, null, null, null, null);
+                if (cursor != null) {
+                    note = MappingHelper.mapCursorToObject(cursor);
+                    cursor.close();
+                }
+            }
+
             actionBarTitle = "Ubah";
             btnTitle = "Update";
             if (note != null) {
@@ -91,39 +105,30 @@ public class NoteAddUpdateActivity extends AppCompatActivity implements View.OnC
         if (v.getId() == R.id.btn_submit) {
             String title = edtTitle.getText().toString().trim();
             String description = edtDescription.getText().toString().trim();
+
             if (TextUtils.isEmpty(title)) {
                 edtTitle.setError("Field can not be blank");
                 return;
             }
-            note.setTitle(title);
-            note.setDescription(description);
-            Intent intent = new Intent();
-            intent.putExtra(EXTRA_NOTE, note);
-            intent.putExtra(EXTRA_POSITION, position);
 
             ContentValues values = new ContentValues();
             values.put(TITLE, title);
             values.put(DESCRIPTION, description);
 
             if (isEdit) {
-                long result = noteHelper.update(String.valueOf(note.getId()), values);
-                if (result > 0) {
-                    setResult(RESULT_UPDATE, intent);
-                    finish();
-                } else {
-                    Toast.makeText(NoteAddUpdateActivity.this, "Gagal mengupdate data", Toast.LENGTH_SHORT).show();
-                }
+                // Gunakan uriWithId untuk update
+                // content://com.dicoding.mynotesapp/note/id
+                getContentResolver().update(uriWithId, values, null, null);
+                Toast.makeText(NoteAddUpdateActivity.this, "Satu item berhasil diedit", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 note.setDate(getCurrentDate());
                 values.put(DATE, getCurrentDate());
-                long result = noteHelper.insert(values);
-                if (result > 0) {
-                    note.setId((int) result);
-                    setResult(RESULT_ADD, intent);
-                    finish();
-                } else {
-                    Toast.makeText(NoteAddUpdateActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
-                }
+                // Gunakan content uri untuk insert
+                // content://com.dicoding.mynotesapp/note/
+                getContentResolver().insert(CONTENT_URI, values);
+                Toast.makeText(NoteAddUpdateActivity.this, "Satu item berhasil disimpan", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
@@ -180,15 +185,11 @@ public class NoteAddUpdateActivity extends AppCompatActivity implements View.OnC
                         if (isDialogClose) {
                             finish();
                         } else {
-                            long result = noteHelper.deleteById(String.valueOf(note.getId()));
-                            if (result > 0) {
-                                Intent intent = new Intent();
-                                intent.putExtra(EXTRA_POSITION, position);
-                                setResult(RESULT_DELETE, intent);
-                                finish();
-                            } else {
-                                Toast.makeText(NoteAddUpdateActivity.this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
-                            }
+                            // Gunakan uriWithId untuk delete
+                            // content://com.dicoding.mynotesapp/note/id
+                            getContentResolver().delete(uriWithId, null, null);
+                            Toast.makeText(NoteAddUpdateActivity.this, "Satu item berhasil dihapus", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                 })
