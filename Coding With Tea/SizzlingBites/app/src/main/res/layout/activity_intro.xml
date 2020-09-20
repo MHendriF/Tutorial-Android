@@ -10,6 +10,7 @@
         android:id="@+id/iv_bg"
         android:layout_width="wrap_content"
         android:layout_height="900dp"
+        android:elevation="2dp"
         android:scaleType="centerCrop"
         android:src="@drawable/bg"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,6 +23,7 @@
         android:id="@+id/iv_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:elevation="2dp"
         android:src="@drawable/inverse_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +35,7 @@
         android:id="@+id/iv_app_name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:elevation="2dp"
         android:src="@drawable/white_app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +47,7 @@
         android:id="@+id/lottie_animation"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
+        android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,5 +55,10 @@
         app:layout_constraintVertical_bias="0"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/splash" />
+
+    <com.cuberto.liquid_swipe.LiquidPager
+        android:id="@+id/liquid_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
