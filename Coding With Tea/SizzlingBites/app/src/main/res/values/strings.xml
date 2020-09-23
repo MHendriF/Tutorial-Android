@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Sizzling Bites</string>
+    <string name="sizzling_bites">Sizzling Bites</string>
+    <string name="skip">Skip</string>
+    <string name="fresh">Fresh</string>
+    <string name="everything">Everything</string>
+    <string name="description">Everything you will experience will be absolutely fresh</string>
+    <string name="home">Home</string>
+    <string name="delivery">Delivery</string>
+    <string name="easy">Easy</string>
+    <string name="payment">Payment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
