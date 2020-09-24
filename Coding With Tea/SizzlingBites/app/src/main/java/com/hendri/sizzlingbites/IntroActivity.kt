@@ -1,6 +1,7 @@
 package com.hendri.sizzlingbites
 
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -10,17 +11,21 @@ import kotlinx.android.synthetic.main.activity_intro.*
 
 class IntroActivity : AppCompatActivity() {
 
-    private val NUM_PAGES = 3
+    companion object {
+        val NUM_PAGES = 3
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
+        supportActionBar?.hide()
 
         val pagerAdapter = ScreenSlidePagerAdapter(
             supportFragmentManager,
             BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         )
         liquid_pager.adapter = pagerAdapter
+        liquid_pager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.o_b_anim))
 
         lottie_animation.animate().translationY(2000.toFloat()).setDuration(1000).startDelay = 4000
         iv_logo.animate().translationY(2000.toFloat()).setDuration(1000).startDelay = 4000
@@ -41,7 +46,7 @@ class IntroActivity : AppCompatActivity() {
          }
 
         override fun getCount(): Int {
-            return 3
+            return NUM_PAGES
         }
     }
 }
