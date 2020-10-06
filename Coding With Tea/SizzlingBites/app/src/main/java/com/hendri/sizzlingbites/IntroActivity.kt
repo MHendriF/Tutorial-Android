@@ -27,10 +27,10 @@ class IntroActivity : AppCompatActivity() {
         liquid_pager.adapter = pagerAdapter
         liquid_pager.startAnimation(AnimationUtils.loadAnimation(this, R.anim.o_b_anim))
 
-        lottie_animation.animate().translationY(2000.toFloat()).setDuration(1000).startDelay = 4000
-        iv_logo.animate().translationY(2000.toFloat()).setDuration(1000).startDelay = 4000
-        iv_app_name.animate().translationY(2000.toFloat()).setDuration(1000).startDelay = 4000
-        iv_bg.animate().translationY(2000.toFloat()).setDuration(1000).startDelay = 4000
+        lottie_animation.animate().translationY(2000f).setDuration(1000).startDelay = 4000
+        iv_logo.animate().translationY(2000f).setDuration(1000).startDelay = 4000
+        iv_app_name.animate().translationY(2000f).setDuration(1000).startDelay = 4000
+        iv_bg.animate().translationY(2000f).setDuration(1000).startDelay = 4000
     }
 
      class ScreenSlidePagerAdapter(fm: FragmentManager, behavior: Int) :

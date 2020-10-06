@@ -4,11 +4,14 @@
     <string name="skip">Skip</string>
     <string name="fresh">Fresh</string>
     <string name="everything">Everything</string>
-    <string name="description">Everything you will experience will be absolutely fresh</string>
+    <string name="description_1">Everything you will experience will be absolutely fresh</string>
+    <string name="description_2">Everything you will experience will be absolutely fresh</string>
+    <string name="description_3">Both credit card and cash on delay are available for your case</string>
     <string name="home">Home</string>
     <string name="delivery">Delivery</string>
     <string name="easy">Easy</string>
     <string name="payment">Payment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome to Sizzling Bites</string>
 </resources>
