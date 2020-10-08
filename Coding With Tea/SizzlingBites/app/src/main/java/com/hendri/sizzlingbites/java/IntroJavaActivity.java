@@ -1,4 +1,4 @@
-package com.hendri.sizzlingbites;
+package com.hendri.sizzlingbites.java;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -10,6 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.hendri.sizzlingbites.OnBoardingFragment1;
+import com.hendri.sizzlingbites.OnBoardingFragment2;
+import com.hendri.sizzlingbites.OnBoardingFragment3;
+import com.hendri.sizzlingbites.R;
 
 public class IntroJavaActivity extends AppCompatActivity {
 

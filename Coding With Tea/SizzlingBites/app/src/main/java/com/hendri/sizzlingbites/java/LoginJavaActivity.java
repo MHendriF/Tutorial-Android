@@ -1,4 +1,4 @@
-package com.hendri.sizzlingbites;
+package com.hendri.sizzlingbites.java;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -9,6 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.hendri.sizzlingbites.LoginAdapterJava;
+import com.hendri.sizzlingbites.R;
 
 public class LoginJavaActivity extends AppCompatActivity {
 

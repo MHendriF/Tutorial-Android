@@ -30,7 +30,7 @@ class IntroActivity : AppCompatActivity() {
         lottie_animation.animate().translationY(2000f).setDuration(1000).startDelay = 4000
         iv_logo.animate().translationY(2000f).setDuration(1000).startDelay = 4000
         iv_app_name.animate().translationY(2000f).setDuration(1000).startDelay = 4000
-        iv_bg.animate().translationY(2000f).setDuration(1000).startDelay = 4000
+        iv_bg.animate().translationY(2200f).setDuration(1000).startDelay = 4000
     }
 
      class ScreenSlidePagerAdapter(fm: FragmentManager, behavior: Int) :
