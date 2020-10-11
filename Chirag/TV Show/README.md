@@ -1,43 +1,24 @@
-# Github User
+# TV Show App
 
-Aplikasi ini dibuat untuk memenuhi syarat kelulusan pada kelas Dicoding [Belajar Fundamental Aplikasi Android](https://www.dicoding.com/academies/14)
+Aplikasi untuk menampilkan daftar list TV Shows menggunakan api [EPISODATE](https://www.episodate.com/)
 
-### Fitur yang ada pada aplikasi
-
-1. Favorite User
-    * Syarat:
-		* Aplikasi harus bisa **menambah** dan **menghapus** user dari daftar favorite.
-		* Aplikasi harus mempunyai halaman yang menampilkan daftar favorite.
-		* Menampilkan halaman detail dari daftar favorite.
-		
-2. Reminder
-    * Syarat: 
-		* Terdapat pengaturan untuk menghidupkan dan mematikan reminder di halaman Setting.
-		* Daily reminder untuk kembali ke aplikasi yang berjalan pada pukul 09.00 AM.
-		
-3. Consumer App
-    * Syarat:
-		* Membuat module baru yang menampilkan daftar user favorite.
-		* Menggunakan Content Provider sebagai mekanisme untuk mengakses data dari satu aplikasi ke aplikasi lain.
-
-4. Stack Widget untuk menampilkan daftar user favorite (opsional).
-
-### Additional
+### Teknologi yang digunakan
     
-    * Menggunakan library pihak ketiga seperti Retrofit, Fast Android Networking, dsb.
-	* Menggunakan library penyimpanan lokal pihak ketiga seperti Room, Realm, dsb.
-    * Menerapkan design pattern seperti MVP, MVVM, Arch Component, dsb.
-    * Aplikasi bisa memberikan pesan eror jika data tidak berhasil ditampilkan.
-    * Menuliskan kode dengan bersih.
-
+	1. MVVM Architecture
+	2. Retrofit
+	3. Lifecycle Extensions
+	4. Room
+	5. RxJava
+	6. Material Design
+	7. Data Binding
+    
 ### Resources
-	* Untuk menambah limit request di Github API silakan ikuti tutorial pada tautan berikut:
-		https://www.dicoding.com/blog/apa-itu-rate-limit-pada-github-api/
+
 	* Gunakan endpoint berikut untuk mendapatkan data:
-		Search : https://api.github.com/search/users?q={username}
-		Detail user : https://api.github.com/users/{username}
-		Follower : https://api.github.com/users/{username}/followers
-		Following : https://api.github.com/users/{username}/following
+		Most Popular TV Show : https://www.episodate.com/api/most-popular?page=1
+		Search : https://www.episodate.com/api/search?q=arrow&page=1
+		Detail : https://www.episodate.com/api/show-details?q=arrow
+		Detail : https://www.episodate.com/api/show-details?q=29560
 		
 ### Author
 _M Hendri Febriansyah_
