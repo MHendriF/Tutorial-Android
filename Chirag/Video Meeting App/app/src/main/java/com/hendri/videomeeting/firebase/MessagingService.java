@@ -1,7 +1,5 @@
 package com.hendri.videomeeting.firebase;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -12,17 +10,10 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
-        Log.d("FCM", "Token: "+s);
     }
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        if (remoteMessage.getNotification() != null) {
-            Log.d(
-                    "FCM",
-                    "Remote message received: "+ remoteMessage.getNotification().getBody()
-            );
-        }
     }
 }
