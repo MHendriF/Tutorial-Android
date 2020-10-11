@@ -14,11 +14,10 @@ Aplikasi untuk menampilkan daftar list TV Shows menggunakan api [EPISODATE](http
     
 ### Resources
 
-	* Gunakan endpoint berikut untuk mendapatkan data:
-		Most Popular TV Show : https://www.episodate.com/api/most-popular?page=1
-		Search : https://www.episodate.com/api/search?q=arrow&page=1
-		Detail : https://www.episodate.com/api/show-details?q=arrow
-		Detail : https://www.episodate.com/api/show-details?q=29560
+	Gunakan endpoint berikut untuk mendapatkan data:
+	* Most Popular TV Show : https://www.episodate.com/api/most-popular?page=1
+	* Search : https://www.episodate.com/api/search?q=arrow&page=1
+	* Detail : https://www.episodate.com/api/show-details?q=arrow atau https://www.episodate.com/api/show-details?q=29560
 		
 ### Author
 _M Hendri Febriansyah_
