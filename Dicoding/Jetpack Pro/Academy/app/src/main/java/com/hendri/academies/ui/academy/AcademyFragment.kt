@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hendri.academies.R
 import com.hendri.academies.ui.adapter.AcademyAdapter
 import com.hendri.academies.ui.viewmodel.AcademyViewModel
-import com.hendri.academies.utils.DataDummy
 import kotlinx.android.synthetic.main.fragment_academy.*
 
 
