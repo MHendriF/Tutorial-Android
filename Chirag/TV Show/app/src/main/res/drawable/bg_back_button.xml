@@ -2,9 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <size
-        android:width="@dimen/_5sdp"
-        android:height="@dimen/_5sdp"/>
+    <solid android:color="#50FFFFFF"/>
 
-    <solid android:color="@color/colorTextOther"/>
 </shape>
