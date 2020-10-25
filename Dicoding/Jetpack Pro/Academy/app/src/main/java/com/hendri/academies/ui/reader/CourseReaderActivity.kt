@@ -2,10 +2,12 @@ package com.hendri.academies.ui.reader
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.hendri.academies.R
 import com.hendri.academies.ui.callback.CourseReaderCallback
 import com.hendri.academies.ui.reader.content.ModuleContentFragment
 import com.hendri.academies.ui.reader.list.ModuleListFragment
+import com.hendri.academies.ui.viewmodel.CourseReaderViewModel
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
 
@@ -16,11 +18,13 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_reader)
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
         if (bundle != null) {
             val courseId = bundle.getString(EXTRA_COURSE_ID)
             if (courseId != null) {
+                viewModel.setSelectedCourse(courseId)
                 populateFragment()
             }
         }
