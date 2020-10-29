@@ -20,7 +20,7 @@ public class TVShowDetails {
     private String[] genres;
     @SerializedName("pictures")
     private String[] pictures;
-    @SerializedName("episode")
+    @SerializedName("episodes")
     private List<Episode> episodes;
 
     public String getUrl() {
