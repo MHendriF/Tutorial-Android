@@ -9,11 +9,11 @@ import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hendri.academies.R
-import com.hendri.academies.data.CourseEntity
+import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.ui.adapter.BookmarkAdapter
 import com.hendri.academies.ui.callback.BookmarkFragmentCallback
 import com.hendri.academies.ui.viewmodel.BookmarkViewModel
-import com.hendri.academies.utils.DataDummy
+import com.hendri.academies.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 
 
@@ -27,7 +27,9 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[BookmarkViewModel::class.java]
+
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
             val courses = viewModel.getBookmarks()
 
             val adapter = BookmarkAdapter(this)

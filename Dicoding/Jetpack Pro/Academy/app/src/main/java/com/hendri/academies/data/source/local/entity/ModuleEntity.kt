@@ -1,4 +1,4 @@
-package com.hendri.academies.data
+package com.hendri.academies.data.source.local.entity
 
 data class ModuleEntity(
     var moduleId: String,

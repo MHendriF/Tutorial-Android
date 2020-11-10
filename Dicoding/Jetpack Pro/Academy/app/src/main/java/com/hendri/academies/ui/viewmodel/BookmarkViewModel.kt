@@ -1,9 +1,9 @@
 package com.hendri.academies.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.hendri.academies.data.CourseEntity
-import com.hendri.academies.utils.DataDummy
+import com.hendri.academies.data.source.local.entity.CourseEntity
+import com.hendri.academies.data.AcademyRepository
 
-class BookmarkViewModel: ViewModel() {
-    fun getBookmarks(): List<CourseEntity> = DataDummy.generateDummyCourses()
+class BookmarkViewModel(private val academyRepository: AcademyRepository): ViewModel() {
+    fun getBookmarks(): List<CourseEntity> = academyRepository.getBookmarkedCourses()
 }

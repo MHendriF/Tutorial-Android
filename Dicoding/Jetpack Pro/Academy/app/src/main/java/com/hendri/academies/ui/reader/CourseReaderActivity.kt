@@ -8,6 +8,7 @@ import com.hendri.academies.ui.callback.CourseReaderCallback
 import com.hendri.academies.ui.reader.content.ModuleContentFragment
 import com.hendri.academies.ui.reader.list.ModuleListFragment
 import com.hendri.academies.ui.viewmodel.CourseReaderViewModel
+import com.hendri.academies.viewmodel.ViewModelFactory
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
 
@@ -18,7 +19,9 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_reader)
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
         if (bundle != null) {

@@ -1,9 +1,9 @@
 package com.hendri.academies.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.hendri.academies.data.CourseEntity
-import com.hendri.academies.utils.DataDummy
+import com.hendri.academies.data.source.local.entity.CourseEntity
+import com.hendri.academies.data.AcademyRepository
 
-class AcademyViewModel: ViewModel() {
-    fun getCourses(): List<CourseEntity> = DataDummy.generateDummyCourses()
+class AcademyViewModel(private val academyRepository: AcademyRepository): ViewModel() {
+    fun getCourses(): List<CourseEntity> = academyRepository.getAllCourses()
 }

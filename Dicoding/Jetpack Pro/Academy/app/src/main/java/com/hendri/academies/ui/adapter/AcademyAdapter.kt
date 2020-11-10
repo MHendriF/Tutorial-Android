@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hendri.academies.R
-import com.hendri.academies.data.CourseEntity
+import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.ui.detail.DetailCourseActivity
 import kotlinx.android.synthetic.main.items_academy.view.*
 

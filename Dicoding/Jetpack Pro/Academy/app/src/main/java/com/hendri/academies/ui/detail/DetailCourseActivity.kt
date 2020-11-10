@@ -2,8 +2,6 @@ package com.hendri.academies.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hendri.academies.R
-import com.hendri.academies.data.CourseEntity
+import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.ui.adapter.DetailCourseAdapter
 import com.hendri.academies.ui.reader.CourseReaderActivity
 import com.hendri.academies.ui.viewmodel.DetailCourseViewModel
-import com.hendri.academies.utils.DataDummy
+import com.hendri.academies.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail_course.*
 import kotlinx.android.synthetic.main.content_detail_course.*
 
@@ -33,7 +31,8 @@ class DetailCourseActivity : AppCompatActivity() {
 
         val adapter = DetailCourseAdapter()
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
