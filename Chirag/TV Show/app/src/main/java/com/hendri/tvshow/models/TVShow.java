@@ -1,20 +1,34 @@
 package com.hendri.tvshow.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
-public class TVShow {
+import java.io.Serializable;
+
+@Entity(tableName = "tvShows")
+public class TVShow implements Serializable {
+
+    @PrimaryKey
     @SerializedName("id")
     private int id;
+
     @SerializedName("name")
     private String name;
+
     @SerializedName("start_date")
     private String startDate;
+
     @SerializedName("country")
     private String country;
+
     @SerializedName("network")
     private String network;
+
     @SerializedName("status")
     private String status;
+
     @SerializedName("image_thumbnail_path")
     private String thumbnail;
 
