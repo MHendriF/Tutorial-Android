@@ -12,12 +12,28 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             delay1()
+            delay2()
         }
     }
 
     private fun delay1() {
+        EspressoIdlingResource.increment()
         Handler().postDelayed({
             text_view.text = getString(R.string.delay1)
+            if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
+                //Memberitahukan bahwa tugas sudah selesai dijalankan
+                EspressoIdlingResource.decrement()
+            }
         }, 2000)
+    }
+
+    private fun delay2() {
+        EspressoIdlingResource.increment()
+        Handler().postDelayed({
+            text_view.text = getString(R.string.delay2)
+            if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
+                EspressoIdlingResource.decrement()
+            }
+        }, 3000)
     }
 }
