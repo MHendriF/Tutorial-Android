@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
             }
         });
         activityMainBinding.ivWatchList.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), WatchlistActivity.class)));
+        activityMainBinding.ivSearch.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SearchActivity.class)));
         getMostPopularTVShows();
     }
 
