@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +31,6 @@ class DetailCourseActivity : AppCompatActivity() {
     }
 
     private var _activityDetailCourseBinding: ActivityDetailCourseBinding? = null
-
     private val mainBinding get() = _activityDetailCourseBinding
     private val contentBinding get() = _activityDetailCourseBinding?.detailContent
 
@@ -45,13 +43,13 @@ class DetailCourseActivity : AppCompatActivity() {
         _activityDetailCourseBinding = ActivityDetailCourseBinding.inflate(layoutInflater)
         setContentView(mainBinding?.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mainBinding?.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = DetailCourseAdapter()
 
         val factory = ViewModelFactory.getInstance(this)
-        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
@@ -59,7 +57,6 @@ class DetailCourseActivity : AppCompatActivity() {
             if (courseId != null) {
                 viewModel.setSelectedCourse(courseId)
 
-                progress_bar.visibility = View.VISIBLE
                 viewModel.courseModule.observe(this, { courseWithModuleResource ->
                     if (courseWithModuleResource != null) {
                         when (courseWithModuleResource.status) {
@@ -152,10 +149,4 @@ class DetailCourseActivity : AppCompatActivity() {
             menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark_white)
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _activityDetailCourseBinding = null
-    }
-
 }
