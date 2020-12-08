@@ -7,19 +7,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.ModuleEntity
+import com.hendri.academies.databinding.ItemsModuleListCustomBinding
 
-class ModuleListAdapter internal constructor(private val listener: MyAdapterClickListener) : RecyclerView.Adapter<ModuleListAdapter.ModuleViewHolder>() {
+class ModuleListAdapter(private val listener: MyAdapterClickListener) : RecyclerView.Adapter<ModuleListAdapter.ModuleViewHolder>() {
     private val listModules = ArrayList<ModuleEntity>()
 
     internal fun setModules(modules: List<ModuleEntity>?) {
         if (modules == null) return
-        listModules.clear()
-        listModules.addAll(modules)
+        this.listModules.clear()
+        this.listModules.addAll(modules)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.items_module_list_custom, parent, false)
-        return ModuleViewHolder(view)
+        val binding = ItemsModuleListCustomBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ModuleViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ModuleViewHolder, position: Int) {
@@ -32,14 +33,13 @@ class ModuleListAdapter internal constructor(private val listener: MyAdapterClic
 
     override fun getItemCount(): Int = listModules.size
 
-    inner class ModuleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textTitle: TextView = itemView.findViewById(R.id.text_module_title)
+    inner class ModuleViewHolder(private val binding: ItemsModuleListCustomBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(module: ModuleEntity) {
-            textTitle.text = module.title
+            binding.textModuleTitle.text = module.title
         }
     }
 }
 
-internal interface MyAdapterClickListener {
+interface MyAdapterClickListener {
     fun onItemClicked(position: Int, moduleId: String)
 }

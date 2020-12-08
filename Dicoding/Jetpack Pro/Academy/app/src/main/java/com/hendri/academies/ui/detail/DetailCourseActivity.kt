@@ -2,8 +2,12 @@ package com.hendri.academies.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,10 +16,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.CourseEntity
+import com.hendri.academies.databinding.ActivityDetailCourseBinding
 import com.hendri.academies.ui.adapter.DetailCourseAdapter
 import com.hendri.academies.ui.reader.CourseReaderActivity
 import com.hendri.academies.ui.viewmodel.DetailCourseViewModel
 import com.hendri.academies.viewmodel.ViewModelFactory
+import com.hendri.academies.vo.Status
 import kotlinx.android.synthetic.main.activity_detail_course.*
 import kotlinx.android.synthetic.main.content_detail_course.*
 
@@ -25,9 +31,20 @@ class DetailCourseActivity : AppCompatActivity() {
         const val EXTRA_COURSE = "extra_course"
     }
 
+    private var _activityDetailCourseBinding: ActivityDetailCourseBinding? = null
+
+    private val mainBinding get() = _activityDetailCourseBinding
+    private val contentBinding get() = _activityDetailCourseBinding?.detailContent
+
+    private lateinit var viewModel: DetailCourseViewModel
+    private var menu: Menu? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_course)
+
+        _activityDetailCourseBinding = ActivityDetailCourseBinding.inflate(layoutInflater)
+        setContentView(mainBinding?.root)
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -43,44 +60,102 @@ class DetailCourseActivity : AppCompatActivity() {
                 viewModel.setSelectedCourse(courseId)
 
                 progress_bar.visibility = View.VISIBLE
-                viewModel.getModules().observe(this, Observer { modules ->
-                    progress_bar.visibility = View.GONE
-                    adapter.setModules(modules)
-                    adapter.notifyDataSetChanged()
+                viewModel.courseModule.observe(this, { courseWithModuleResource ->
+                    if (courseWithModuleResource != null) {
+                        when (courseWithModuleResource.status) {
+                            Status.LOADING -> mainBinding?.progressBar?.visibility = View.VISIBLE
+                            Status.SUCCESS -> if (courseWithModuleResource.data != null) {
+                                mainBinding?.progressBar?.visibility = View.GONE
+                                mainBinding?.content?.visibility = View.VISIBLE
+
+                                adapter.setModules(courseWithModuleResource.data.mModules)
+                                adapter.notifyDataSetChanged()
+                                populateCourse(courseWithModuleResource.data.mCourse)
+                            }
+                            Status.ERROR -> {
+                                mainBinding?.progressBar?.visibility = View.GONE
+                                Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 })
-                viewModel.getCourse().observe(this, Observer { course -> populateCourse(course) })
 
             }
         }
 
-        with(rv_module) {
-            isNestedScrollingEnabled = false
-            layoutManager = LinearLayoutManager(this@DetailCourseActivity)
-            setHasFixedSize(true)
-            this.adapter = adapter
-            val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
-            addItemDecoration(dividerItemDecoration)
+        with(contentBinding?.rvModule) {
+            this?.isNestedScrollingEnabled = false
+            this?.layoutManager = LinearLayoutManager(this@DetailCourseActivity)
+            this?.setHasFixedSize(true)
+            this?.adapter = adapter
+            val dividerItemDecoration = DividerItemDecoration(this?.context, DividerItemDecoration.VERTICAL)
+            this?.addItemDecoration(dividerItemDecoration)
         }
     }
 
     private fun populateCourse(courseEntity: CourseEntity) {
-        text_title.text = courseEntity.title
-        text_desc.text = courseEntity.description
-        text_date.text = resources.getString(R.string.deadline_date, courseEntity.deadline)
+        contentBinding?.textTitle?.text = courseEntity.title
+        contentBinding?.textDescription?.text = courseEntity.description
+        contentBinding?.textDate?.text = resources.getString(R.string.deadline_date, courseEntity.deadline)
 
-        Glide.with(this)
-            .load(courseEntity.imagePath)
-            .apply(
-                RequestOptions.placeholderOf(R.drawable.ic_loading)
-                .error(R.drawable.ic_error))
-            .into(image_poster)
+        contentBinding?.imagePoster?.let {
+            Glide.with(this)
+                .load(courseEntity.imagePath)
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
+                    .error(R.drawable.ic_error))
+                .into(it)
+        }
 
-        btn_start.setOnClickListener {
-            val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java).apply {
-                putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
-            }
+        contentBinding?.btnStart?.setOnClickListener {
+            val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)
+            intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
             startActivity(intent)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        this.menu = menu
+        viewModel.courseModule.observe(this, { courseWithModule ->
+            if (courseWithModule != null) {
+                when (courseWithModule.status) {
+                    Status.LOADING -> mainBinding?.progressBar?.visibility = View.VISIBLE
+                    Status.SUCCESS -> if (courseWithModule.data != null) {
+                        mainBinding?.progressBar?.visibility = View.GONE
+                        val state = courseWithModule.data.mCourse.bookmarked
+                        setBookmarkState(state)
+                    }
+                    Status.ERROR -> {
+                        mainBinding?.progressBar?.visibility = View.GONE
+                        Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_bookmark) {
+            viewModel.setBookmark()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBookmarkState(state: Boolean) {
+        if (menu == null) return
+        val menuItem = menu?.findItem(R.id.action_bookmark)
+        if (state) {
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmarked_white)
+        } else {
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark_white)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _activityDetailCourseBinding = null
     }
 
 }

@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.CourseEntity
+import com.hendri.academies.databinding.ItemsBookmarkBinding
 import com.hendri.academies.ui.callback.BookmarkFragmentCallback
 import com.hendri.academies.ui.detail.DetailCourseActivity
 import kotlinx.android.synthetic.main.items_bookmark.view.*
@@ -18,13 +19,14 @@ class BookmarkAdapter(private val callback: BookmarkFragmentCallback) : Recycler
 
     fun setCourses(courses: List<CourseEntity>?) {
         if (courses == null) return
-        listCourses.clear()
-        listCourses.addAll(courses)
+        this.listCourses.clear()
+        this.listCourses.addAll(courses)
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.items_bookmark, parent, false)
-        return CourseViewHolder(view)
+        val itemsBookmarkBinding = ItemsBookmarkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CourseViewHolder(itemsBookmarkBinding)
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
@@ -34,25 +36,22 @@ class BookmarkAdapter(private val callback: BookmarkFragmentCallback) : Recycler
 
     override fun getItemCount(): Int = listCourses.size
 
-    inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(course: CourseEntity){
-            with(itemView){
-                tv_item_title.text = course.title
-                tv_item_description.text = course.description
-                tv_item_date.text = resources.getString(R.string.deadline_date, course.deadline)
-                setOnClickListener {
-                    val intent = Intent(context, DetailCourseActivity::class.java).apply {
-                        putExtra(DetailCourseActivity.EXTRA_COURSE, course.courseId)
-                    }
-                    context.startActivity(intent)
+    inner class CourseViewHolder(private val binding: ItemsBookmarkBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(course: CourseEntity) {
+            with(binding) {
+                tvItemTitle.text = course.title
+                tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailCourseActivity::class.java)
+                    intent.putExtra(DetailCourseActivity.EXTRA_COURSE, course.courseId)
+                    itemView.context.startActivity(intent)
                 }
-                img_share.setOnClickListener { callback.onShareClick(course) }
-                Glide.with(context)
+                imgShare.setOnClickListener { callback.onShareClick(course) }
+                Glide.with(itemView.context)
                     .load(course.imagePath)
-                    .apply(
-                        RequestOptions.placeholderOf(R.drawable.ic_loading)
-                            .error(R.drawable.ic_error))
-                    .into(img_poster)
+                    .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
+                        .error(R.drawable.ic_error))
+                    .into(imgPoster)
             }
         }
     }
