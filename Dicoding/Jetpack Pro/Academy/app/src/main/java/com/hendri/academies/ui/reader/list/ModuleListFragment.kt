@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.ModuleEntity
 import com.hendri.academies.databinding.FragmentModuleListBinding
 import com.hendri.academies.ui.adapter.ModuleListAdapter
@@ -21,7 +19,6 @@ import com.hendri.academies.ui.reader.CourseReaderActivity
 import com.hendri.academies.ui.viewmodel.CourseReaderViewModel
 import com.hendri.academies.viewmodel.ViewModelFactory
 import com.hendri.academies.vo.Status
-import kotlinx.android.synthetic.main.fragment_module_list.*
 
 
 class ModuleListFragment : Fragment(), MyAdapterClickListener {
@@ -52,7 +49,6 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
         viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
         adapter = ModuleListAdapter(this)
 
-        progress_bar.visibility = View.VISIBLE
         viewModel.modules.observe(viewLifecycleOwner, { moduleEntities ->
             if (moduleEntities != null) {
                 when (moduleEntities.status) {

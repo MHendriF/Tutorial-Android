@@ -2,7 +2,6 @@ package com.hendri.academies.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,7 +10,6 @@ import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.databinding.ItemsAcademyBinding
 import com.hendri.academies.ui.detail.DetailCourseActivity
-import kotlinx.android.synthetic.main.items_academy.view.*
 
 class AcademyAdapter : RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
 
@@ -19,8 +17,8 @@ class AcademyAdapter : RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
 
     fun setCourses(courses: List<CourseEntity>?) {
         if (courses == null) return
-        listCourses.clear()
-        listCourses.addAll(courses)
+        this.listCourses.clear()
+        this.listCourses.addAll(courses)
     }
 
     override fun onCreateViewHolder(
@@ -31,7 +29,7 @@ class AcademyAdapter : RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
         return CourseViewHolder(itemsAcademyBinding)
     }
 
-    override fun onBindViewHolder(holder: AcademyAdapter.CourseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         val course = listCourses[position]
         holder.bind(course)
     }

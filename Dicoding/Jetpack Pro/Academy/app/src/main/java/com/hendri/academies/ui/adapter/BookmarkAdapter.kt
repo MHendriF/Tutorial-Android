@@ -12,7 +12,6 @@ import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.databinding.ItemsBookmarkBinding
 import com.hendri.academies.ui.callback.BookmarkFragmentCallback
 import com.hendri.academies.ui.detail.DetailCourseActivity
-import kotlinx.android.synthetic.main.items_bookmark.view.*
 
 class BookmarkAdapter(private val callback: BookmarkFragmentCallback) : RecyclerView.Adapter<BookmarkAdapter.CourseViewHolder>() {
     private val listCourses = ArrayList<CourseEntity>()

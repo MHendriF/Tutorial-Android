@@ -1,13 +1,10 @@
 package com.hendri.academies.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.ModuleEntity
 import com.hendri.academies.databinding.ItemsModuleListBinding
-import kotlinx.android.synthetic.main.items_module_list.view.*
 
 class DetailCourseAdapter : RecyclerView.Adapter<DetailCourseAdapter.ModuleViewHolder>() {
 
@@ -15,8 +12,8 @@ class DetailCourseAdapter : RecyclerView.Adapter<DetailCourseAdapter.ModuleViewH
 
     fun setModules(modules: List<ModuleEntity>?) {
         if (modules == null) return
-        listModules.clear()
-        listModules.addAll(modules)
+        this.listModules.clear()
+        this.listModules.addAll(modules)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModuleViewHolder {

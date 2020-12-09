@@ -2,10 +2,8 @@ package com.hendri.academies.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.hendri.academies.R
 import com.hendri.academies.databinding.ActivityHomeBinding
 import com.hendri.academies.ui.adapter.SectionsPagerAdapter
-import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 

@@ -28,7 +28,7 @@ class BookmarkViewModelTest {
     private lateinit var academyRepository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<List<CourseEntity>>
+    private lateinit var observer : Observer<List<CourseEntity>>
 
     @Before
     fun setUp() {
@@ -36,14 +36,14 @@ class BookmarkViewModelTest {
     }
 
     @Test
-    fun getBookmarks() {
+    fun getBookmark() {
         val dummyCourses = DataDummy.generateDummyCourses()
         val courses = MutableLiveData<List<CourseEntity>>()
         courses.value = dummyCourses
 
         `when`(academyRepository.getBookmarkedCourses()).thenReturn(courses)
         val courseEntities = viewModel.getBookmarks().value
-        verify<AcademyRepository>(academyRepository).getBookmarkedCourses()
+        verify(academyRepository).getBookmarkedCourses()
         assertNotNull(courseEntities)
         assertEquals(5, courseEntities?.size)
 

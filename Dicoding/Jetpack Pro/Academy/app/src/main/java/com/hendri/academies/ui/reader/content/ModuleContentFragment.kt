@@ -6,15 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.hendri.academies.R
 import com.hendri.academies.data.source.local.entity.ModuleEntity
 import com.hendri.academies.databinding.FragmentModuleContentBinding
 import com.hendri.academies.ui.viewmodel.CourseReaderViewModel
 import com.hendri.academies.viewmodel.ViewModelFactory
 import com.hendri.academies.vo.Status
-import kotlinx.android.synthetic.main.fragment_module_content.*
 
 
 class ModuleContentFragment : Fragment() {
@@ -24,7 +21,7 @@ class ModuleContentFragment : Fragment() {
     private val binding get() = _fragmentModuleContentBinding
 
     companion object {
-        val TAG = ModuleContentFragment::class.java.simpleName
+        val TAG: String = ModuleContentFragment::class.java.simpleName
 
         fun newInstance(): ModuleContentFragment {
             return ModuleContentFragment()
@@ -45,7 +42,6 @@ class ModuleContentFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
 
-            progress_bar.visibility = View.VISIBLE
             viewModel.selectedModule.observe(viewLifecycleOwner, { moduleEntity ->
                 if (moduleEntity != null) {
                     when (moduleEntity.status) {
@@ -81,7 +77,7 @@ class ModuleContentFragment : Fragment() {
     }
 
     private fun populateWebView(module: ModuleEntity) {
-        module.contentEntity?.content?.let { web_view.loadData(it, "text/html", "UTF-8") }
+        binding?.webView?.loadData(module.contentEntity?.content ?: "", "text/html", "UTF-8")
     }
 
     private fun setButtonNextPrevState(module: ModuleEntity) {

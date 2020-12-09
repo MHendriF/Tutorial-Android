@@ -16,7 +16,6 @@ import com.hendri.academies.ui.adapter.BookmarkAdapter
 import com.hendri.academies.ui.callback.BookmarkFragmentCallback
 import com.hendri.academies.ui.viewmodel.BookmarkViewModel
 import com.hendri.academies.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_bookmark.*
 
 
 class BookmarkFragment : Fragment(), BookmarkFragmentCallback {

@@ -18,6 +18,5 @@ object Injection {
         val appExecutors = AppExecutors()
 
         return AcademyRepository.getInstance(remoteDataSource, localDataSource, appExecutors)
-
     }
 }

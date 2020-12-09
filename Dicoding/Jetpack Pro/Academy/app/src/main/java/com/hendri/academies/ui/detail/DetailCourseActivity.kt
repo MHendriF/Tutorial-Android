@@ -21,8 +21,6 @@ import com.hendri.academies.ui.reader.CourseReaderActivity
 import com.hendri.academies.ui.viewmodel.DetailCourseViewModel
 import com.hendri.academies.viewmodel.ViewModelFactory
 import com.hendri.academies.vo.Status
-import kotlinx.android.synthetic.main.activity_detail_course.*
-import kotlinx.android.synthetic.main.content_detail_course.*
 
 class DetailCourseActivity : AppCompatActivity() {
 
