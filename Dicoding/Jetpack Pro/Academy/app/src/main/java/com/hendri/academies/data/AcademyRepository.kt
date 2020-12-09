@@ -2,6 +2,8 @@ package com.hendri.academies.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.hendri.academies.data.source.local.LocalDataSource
 import com.hendri.academies.data.source.local.entity.ContentEntity
 import com.hendri.academies.data.source.local.entity.CourseEntity
@@ -36,20 +38,26 @@ class AcademyRepository private constructor(
             }
     }
 
-    override fun getAllCourses(): LiveData<Resource<List<CourseEntity>>> {
-        return object : NetworkBoundResource<List<CourseEntity>, List<CourseResponse>>(appExecutors) {
-            public override fun loadFromDB(): LiveData<List<CourseEntity>> =
-                localDataSource.getAllCourses()
+    override fun getAllCourses(): LiveData<Resource<PagedList<CourseEntity>>> {
+        return object : NetworkBoundResource<PagedList<CourseEntity>, List<CourseResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<PagedList<CourseEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+                return LivePagedListBuilder(localDataSource.getAllCourses(), config).build()
+            }
 
-            override fun shouldFetch(data: List<CourseEntity>?): Boolean =
+            override fun shouldFetch(data: PagedList<CourseEntity>?): Boolean =
                 data == null || data.isEmpty()
 
             public override fun createCall(): LiveData<ApiResponse<List<CourseResponse>>> =
                 remoteDataSource.getAllCourses()
 
-            public override fun saveCallResult(courseResponses: List<CourseResponse>) {
+            public override fun saveCallResult(data: List<CourseResponse>) {
                 val courseList = ArrayList<CourseEntity>()
-                for (response in courseResponses) {
+                for (response in data) {
                     val course = CourseEntity(response.id,
                         response.title,
                         response.description,
@@ -64,9 +72,14 @@ class AcademyRepository private constructor(
         }.asLiveData()
     }
 
-    override fun getBookmarkedCourses(): LiveData<List<CourseEntity>> =
-        localDataSource.getBookmarkedCourses()
-
+    override fun getBookmarkedCourses(): LiveData<PagedList<CourseEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getBookmarkedCourses(), config).build()
+    }
     override fun getCourseWithModules(courseId: String): LiveData<Resource<CourseWithModule>> {
         return object : NetworkBoundResource<CourseWithModule, List<ModuleResponse>>(appExecutors) {
             override fun loadFromDB(): LiveData<CourseWithModule> =
