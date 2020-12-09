@@ -3,6 +3,7 @@ package com.hendri.academies.ui.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.hendri.academies.data.AcademyRepository
 import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.utils.DataDummy
@@ -29,7 +30,10 @@ class AcademyViewModelTest {
     private lateinit var academyRepository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<List<CourseEntity>>>
+    private lateinit var observer: Observer<Resource<PagedList<CourseEntity>>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<CourseEntity>
 
     @Before
     fun setUp() {
@@ -38,8 +42,9 @@ class AcademyViewModelTest {
 
     @Test
     fun getCourses() {
-        val dummyCourses = Resource.success(DataDummy.generateDummyCourses())
-        val courses = MutableLiveData<Resource<List<CourseEntity>>>()
+        val dummyCourses = Resource.success(pagedList)
+        `when`(dummyCourses.data?.size).thenReturn(5)
+        val courses = MutableLiveData<Resource<PagedList<CourseEntity>>>()
         courses.value = dummyCourses
 
         `when`(academyRepository.getAllCourses()).thenReturn(courses)

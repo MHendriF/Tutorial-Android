@@ -1,7 +1,9 @@
 package com.hendri.academies.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import com.hendri.academies.data.source.local.LocalDataSource
 import com.hendri.academies.data.source.local.entity.CourseEntity
 import com.hendri.academies.data.source.local.entity.CourseWithModule
@@ -10,6 +12,8 @@ import com.hendri.academies.data.source.remote.RemoteDataSource
 import com.hendri.academies.utils.AppExecutors
 import com.hendri.academies.utils.DataDummy
 import com.hendri.academies.utils.LiveDataTestUtil
+import com.hendri.academies.utils.PagedListUtil
+import com.hendri.academies.vo.Resource
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -23,7 +27,6 @@ import com.nhaarman.mockitokotlin2.doAnswer
 import org.mockito.Mockito
 
 class AcademyRepositoryTest {
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -41,11 +44,11 @@ class AcademyRepositoryTest {
 
     @Test
     fun getAllCourses() {
-        val dummyCourses = MutableLiveData<List<CourseEntity>>()
-        dummyCourses.value = DataDummy.generateDummyCourses()
-        Mockito.`when`(local.getAllCourses()).thenReturn(dummyCourses)
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, CourseEntity>
+        Mockito.`when`(local.getAllCourses()).thenReturn(dataSourceFactory)
+        academyRepository.getAllCourses()
 
-        val courseEntities = LiveDataTestUtil.getValue(academyRepository.getAllCourses())
+        val courseEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyCourses()))
         verify(local).getAllCourses()
         assertNotNull(courseEntities.data)
         assertEquals(courseResponses.size.toLong(), courseEntities.data?.size?.toLong())
@@ -65,21 +68,21 @@ class AcademyRepositoryTest {
 
     @Test
     fun getBookmarkedCourses() {
-        val dummyCourses = MutableLiveData<List<CourseEntity>>()
-        dummyCourses.value = DataDummy.generateDummyCourses()
-        Mockito.`when`(local.getBookmarkedCourses()).thenReturn(dummyCourses)
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, CourseEntity>
+        Mockito.`when`(local.getBookmarkedCourses()).thenReturn(dataSourceFactory)
+        academyRepository.getBookmarkedCourses()
 
-        val courseEntities = LiveDataTestUtil.getValue(academyRepository.getBookmarkedCourses())
+        val courseEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyCourses()))
         verify(local).getBookmarkedCourses()
         assertNotNull(courseEntities)
-        assertEquals(courseResponses.size.toLong(), courseEntities.size.toLong())
+        assertEquals(courseResponses.size.toLong(), courseEntities.data?.size?.toLong())
     }
 
     @Test
     fun getContent() {
         val dummyEntity = MutableLiveData<ModuleEntity>()
         dummyEntity.value = DataDummy.generateDummyModuleWithContent(moduleId)
-        Mockito.`when`(local.getModuleWithContent(courseId)).thenReturn(dummyEntity)
+        Mockito.`when`<LiveData<ModuleEntity>>(local.getModuleWithContent(courseId)).thenReturn(dummyEntity)
 
         val courseEntitiesContent = LiveDataTestUtil.getValue(academyRepository.getContent(courseId))
         verify(local).getModuleWithContent(courseId)
@@ -94,7 +97,7 @@ class AcademyRepositoryTest {
     fun getCourseWithModules() {
         val dummyEntity = MutableLiveData<CourseWithModule>()
         dummyEntity.value = DataDummy.generateDummyCourseWithModules(DataDummy.generateDummyCourses()[0], false)
-        Mockito.`when`(local.getCourseWithModules(courseId)).thenReturn(dummyEntity)
+        Mockito.`when`<LiveData<CourseWithModule>>(local.getCourseWithModules(courseId)).thenReturn(dummyEntity)
 
         val courseEntities = LiveDataTestUtil.getValue(academyRepository.getCourseWithModules(courseId))
         verify(local).getCourseWithModules(courseId)
