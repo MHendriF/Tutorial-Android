@@ -35,14 +35,13 @@ class ModuleContentFragment : Fragment() {
         return binding?.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-
             val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
+            viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
 
-            viewModel.selectedModule.observe(viewLifecycleOwner, { moduleEntity ->
+            viewModel.selectedModule.observe(this, { moduleEntity ->
                 if (moduleEntity != null) {
                     when (moduleEntity.status) {
                         Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
@@ -69,11 +68,6 @@ class ModuleContentFragment : Fragment() {
                 }
             })
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _fragmentModuleContentBinding = null
     }
 
     private fun populateWebView(module: ModuleEntity) {

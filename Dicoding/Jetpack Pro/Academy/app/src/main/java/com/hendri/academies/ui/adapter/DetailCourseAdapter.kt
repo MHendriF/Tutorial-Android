@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hendri.academies.data.source.local.entity.ModuleEntity
 import com.hendri.academies.databinding.ItemsModuleListBinding
+import java.util.ArrayList
 
 class DetailCourseAdapter : RecyclerView.Adapter<DetailCourseAdapter.ModuleViewHolder>() {
 
