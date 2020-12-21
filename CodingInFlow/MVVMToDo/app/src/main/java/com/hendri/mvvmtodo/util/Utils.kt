@@ -1,4 +1,4 @@
 package com.hendri.mvvmtodo.util
 
-class Utils {
-}
+val <T> T.exhaustive: T
+    get() = this
