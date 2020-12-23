@@ -2,10 +2,11 @@ package com.hendri.mytourismapp.home
 
 import androidx.lifecycle.ViewModel
 import com.hendri.mytourismapp.core.data.TourismRepository
+import com.hendri.mytourismapp.core.domain.usecase.TourismUseCase
 
-class HomeViewModel(tourismRepository: TourismRepository) : ViewModel() {
+class HomeViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
 
-    val tourism = tourismRepository.getAllTourism()
+    val tourism = tourismUseCase.getAllTourism()
 
 }
 

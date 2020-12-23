@@ -1,11 +1,11 @@
 package com.hendri.mytourismapp.favorite
 
 import androidx.lifecycle.ViewModel
-import com.hendri.mytourismapp.core.data.TourismRepository
+import com.hendri.mytourismapp.core.domain.usecase.TourismUseCase
 
-class FavoriteViewModel(tourismRepository: TourismRepository) : ViewModel() {
+class FavoriteViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
 
-    val favoriteTourism = tourismRepository.getFavoriteTourism()
+    val favoriteTourism = tourismUseCase.getFavoriteTourism()
 
 }
 
