@@ -1,4 +1,4 @@
-package com.hendri.myreactivesearch
+package com.mhendrif.myreactivesearch
 
 import org.junit.Test
 
