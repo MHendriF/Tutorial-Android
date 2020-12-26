@@ -1,4 +1,4 @@
-package com.mhendrif.mysimplelogin
+package com.mhendrif.core
 
 import android.content.Context
 import android.content.SharedPreferences

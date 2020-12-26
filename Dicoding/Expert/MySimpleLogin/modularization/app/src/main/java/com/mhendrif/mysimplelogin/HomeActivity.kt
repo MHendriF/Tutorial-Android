@@ -1,8 +1,11 @@
 package com.mhendrif.mysimplelogin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.mhendrif.core.SessionManager
+import com.mhendrif.core.UserRepository
 import com.mhendrif.mysimplelogin.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {

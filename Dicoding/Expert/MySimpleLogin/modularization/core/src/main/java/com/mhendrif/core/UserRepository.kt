@@ -1,4 +1,4 @@
-package com.mhendrif.mysimplelogin
+package com.mhendrif.core
 
 class UserRepository(private val sesi: SessionManager) {
 

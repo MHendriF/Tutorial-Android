@@ -3,6 +3,8 @@ package com.mhendrif.mysimplelogin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.mhendrif.core.SessionManager
+import com.mhendrif.core.UserRepository
 import com.mhendrif.mysimplelogin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
