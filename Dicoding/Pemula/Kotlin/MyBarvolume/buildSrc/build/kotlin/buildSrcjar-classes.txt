@@ -1,0 +1,1 @@
+C:\Users\LEGION\AndroidStudioProjects\Tutorial-Android\Dicoding\Pemula\Kotlin\MyBarvolume\buildSrc\build\classes\kotlin\main\Version.class
