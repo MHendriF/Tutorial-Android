@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "494302530443",
+    "project_id": "my-report-app-95478",
+    "storage_bucket": "my-report-app-95478.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494302530443:android:3c2d3db7238416d83e3d8e",
+        "android_client_info": {
+          "package_name": "com.mhendrif.myreportapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494302530443-os2vu04dta025gsmfhd984jp67n0nnfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnBTpVUO64V8_-2rC962q6D51_t-TjAEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494302530443-os2vu04dta025gsmfhd984jp67n0nnfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
