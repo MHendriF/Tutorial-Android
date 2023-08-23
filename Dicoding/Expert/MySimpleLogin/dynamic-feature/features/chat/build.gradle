@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.dynamic-feature'
+    id 'kotlin-android'
+}
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.mhendrif.mysimplelogin.chat"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(":core")
+    implementation project(":app")
+
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${versions.espresso}"
+    androidTestImplementation "androidx.test:rules:${versions.testRules}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.extJunit}"
+
+    // When using API in base, some dependencies might have to be re-added for test implementation.
+    androidTestImplementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    androidTestImplementation "com.google.android.play:core:${versions.playcore}"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+}

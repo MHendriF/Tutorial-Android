@@ -2,25 +2,36 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        applicationId "com.mhendrif.mysimplelogin"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
+        applicationId names.applicationId
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 6
+        versionName "6.0"
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
+            keyAlias 'mhendrif.mysimplelogin'
+            keyPassword 'mhendrif.mysimplelogin12345'
+            storeFile file('D:/Android/KeyStore/mhendrif.mysimplelogin/mhendrif.mysimplelogin.jks')
+            storePassword 'mhendrif.mysimplelogin12345'
+        }
+    }
+
+    buildTypes {
+        debug {}
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,18 +45,29 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    dynamicFeatures = [':chat']
+
+    dynamicFeatures = [':features:chat']
+
+    ndkVersion '21.0.6113669'
 }
 
 dependencies {
     implementation project(":core")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation "com.google.android.play:core:1.9.0"
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${versions.espresso}"
+    androidTestImplementation "androidx.test:rules:${versions.testRules}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.extJunit}"
+
+    // When using API in base, some dependencies might have to be re-added for test implementation.
+    androidTestImplementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    androidTestImplementation "com.google.android.play:core:${versions.playcore}"
+    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 }

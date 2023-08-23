@@ -1,4 +1,4 @@
-include ':chat'
+include ':features:chat'
 include ':core'
 include ':app'
 rootProject.name = "MySimpleLogin"

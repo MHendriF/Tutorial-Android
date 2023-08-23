@@ -7,7 +7,7 @@ import com.mhendrif.core.SessionManager
 import com.mhendrif.core.UserRepository
 import com.mhendrif.mysimplelogin.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseSplitActivity() {
 
     lateinit var binding: ActivityMainBinding
     lateinit var userRepository: UserRepository
