@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mhendrif.myservice"
-    compileSdk = 33
+    compileSdk = 34
 
     buildFeatures {
         viewBinding = true
