@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mhendrif.mymediaplayer"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.mhendrif.mymediaplayer"
